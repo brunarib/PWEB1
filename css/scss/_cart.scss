@@ -1,0 +1,25 @@
+.cart-container {
+    position: relative;
+    display: flex;
+    width: 30px;
+    height: 30px;
+
+    img{
+        width: 30px;
+    }
+    
+    .cart__itens {
+        position: absolute;
+        bottom: 0;
+        border-radius: 50%;
+        width: 15px;
+        background-color: #006DD2;
+        height: 15px;
+        display: flex;
+        font-weight: 700;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+        font-size: 12px;
+    }
+}

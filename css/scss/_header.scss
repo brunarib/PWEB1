@@ -1,5 +1,14 @@
-$blue: #89e;
-
-body{
-    background-color: blue;
+header{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    background-color: #fff;
+    z-index: 99;
+    box-shadow: 0 0.2rem 0.7rem rgba(#000, 0.1)
 }
