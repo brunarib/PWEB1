@@ -42,7 +42,7 @@ function browser(){
 function watch(){
     gulp.watch('css/scss/**/*.scss', compSass);
     gulp.watch(['js/**/*.js', '!js/main.js'], gulpJS);
-    gulp.watch(['*.html']).on('change', browserSync.reload);
+    gulp.watch(['*.html', './**/*.html']).on('change', browserSync.reload);
 }
 
 exports.gulpJS = gulpJS;

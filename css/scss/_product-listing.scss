@@ -1,0 +1,130 @@
+.product-listing{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+
+    .listing-item{
+        width: 380px;
+        height: 520px;
+    
+        .item-content{
+            padding: 20px;
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.04), 0px 2px 6px 
+            rgba(0, 0, 0, 0.04), 0px 0px 1px 
+            rgba(0, 0, 0, 0.04);
+            margin-bottom: 30px;
+            border-bottom-left-radius: 6px;
+            border-bottom-right-radius: 6px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 340px;
+            overflow-y: auto;
+    
+            &::-webkit-scrollbar {
+                width: 5px;
+            }
+    
+            &::-webkit-scrollbar-track {
+                background: #f1f1f1; 
+            }
+    
+            &::-webkit-scrollbar-thumb {
+                background: red; 
+            }
+    
+            &::-webkit-scrollbar-thumb:hover {
+                background-color: green;
+            }
+        }
+    
+        .content__title{
+            h3{
+                font-size: 24px;
+                font-weight: bold;
+                height: 70px;
+                overflow: hidden;
+                margin-bottom: 20px;
+            }
+        }
+    
+        .content__item{
+            font-size: 14px;
+            margin-bottom: 8px;
+            height: 20px;
+            overflow: hidden;
+        }
+    
+        .content__icon{
+            color: grey;
+            -webkit-text-fill-color: transparent;
+            -webkit-text-stroke-width: 1px;
+            margin-right: 10px;
+            margin-left: 1px;
+        }
+    
+        .item-prices{
+            padding-top: 15px;
+            font-size: 16px;
+            border-top: 1px solid rgba(rgb(0, 0, 0),.05);
+            display: flex;
+            justify-content: space-between;
+        }
+    
+        .payment__installment{
+            display: flex;
+            margin-bottom: 4px;
+        }
+    
+        .prices__total{
+            margin-bottom: 10px;
+            font-size: 12px;
+            color: rgba(0, 0, 0, 0.38);
+            letter-spacing: 0.4px;
+        }
+    
+        .installment__value{
+            margin-left: 2px;
+            color: #006DD2;
+            font-weight: bold;
+        }
+    }
+    
+    .content__description{
+        p{
+            font-size: 16px;
+            color: rgba(0, 0, 0, 0.6);
+        }
+    }
+    
+    .prices__button{
+        font-size: 14px;
+        font-weight: bold;
+        color: #fff;
+        text-transform: uppercase;
+        padding: 10px;
+        border-radius: 6px;
+        width: max-content;
+        display: block;
+        background-color: #006DD2;
+        transition: 400ms;
+        border: 1px solid transparent;
+        margin-top: 0;
+        text-decoration: none;
+    
+        &:hover{
+            background-color: #fff;
+            color: #006DD2;
+            border-color: #006DD2;
+        }
+    }
+
+    .content__categorie{
+        small{
+            color: #006DD2;
+            font-size: 12px;
+            text-transform: uppercase;
+            font-weight: bold;
+            letter-spacing: 1.2px;
+        }
+    }
+}

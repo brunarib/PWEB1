@@ -1,0 +1,327 @@
+.form {
+    width: max-content;
+    border: 1px solid #909296;
+    border-radius: 10px;
+    padding: 30px;
+    max-width: 90%;
+
+    &.form--reset-password {
+        max-width: 444px;
+        width: 90%;
+        margin-bottom: 40px;
+    }
+
+    &.form--login {
+        max-width: 500px;
+        width: 90%;
+        margin-bottom: 40px;
+    }
+
+    &.form--forgotn {
+        max-width: 600px;
+        width: 90%;
+    }
+
+    &.form--register {
+        max-width: 830px;
+        width: 90%;
+        margin-bottom: 40px;
+
+        .form__checkbox {
+            justify-content: center;
+        }
+    }
+
+    &.form--sucess {
+        max-width: 506px;
+        width: 90%;
+    }
+
+    .form__content * {
+        transition: 1s;
+    }
+}
+
+.form__navigation {
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 13px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: max-content;
+
+    span {
+        margin-right: 10px;
+        font-size: 18px;
+    }
+
+    &:hover {
+        color: get-color(primary);
+    };
+
+    @media(min-width:1200px) {
+        position: absolute;
+        top: 40px;
+        left: 30px;
+    }
+}
+
+h2 {
+    color: get-color(primary);
+    font-size: 2.4rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 2.9rem;
+    letter-spacing: 0rem;
+    text-align: center;
+    margin-bottom: 40px;
+
+    i {
+        font-size: 60px;
+    }
+}
+
+
+.form__input {
+    margin-bottom: 40px;
+
+    label {
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 18px;
+        letter-spacing:  0.12rem;
+        text-align: left;
+        display: block;
+        color: get-color(primary);
+        text-transform: uppercase;
+    }
+
+    input {
+        border: 1px solid get-color(primary);
+        box-sizing: border-box;
+        border-radius: 6px;
+        display: block;
+        width: 100%;
+        padding: 15px;
+        font-size: 14px;
+        outline: none;
+
+        &:focus {
+            border: 1px solid get-color(orange);
+        }
+    }
+
+    span {
+        color: red;
+        font-size: 10px;
+    }
+}
+
+.form__checkbox {
+    display: flex;
+    align-items: baseline;
+    margin-bottom: 40px;
+
+    label {
+        color: get-color(form-label);
+
+        a {
+            color: get-color(primary);
+        }
+    }
+
+    label {
+        font-family: Lato;
+        font-size: 1.4rem;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 2rem;
+        letter-spacing: 0.025rem;
+        text-align: left;
+    }
+}
+
+input[type="checkbox"]{
+    min-width: 15px;
+    height: 15px;
+    border: 2px solid get-color(primary);
+    border-radius: 4px;
+    display: block;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.form__actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 40px;
+
+    a {
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 2rem;
+        letter-spacing: 0.04rem;
+        text-align: center;
+        text-transform: uppercase;
+        transition: 300ms;
+
+        &:hover {
+            opacity: 0.7;
+        }
+
+        & + input {
+            margin-left: 45px;
+        }
+    }
+
+    input {
+        width: max-content;
+        max-width: 100%;
+        cursor: pointer;
+        border-radius: 6px;
+        padding: 10px 24px 10px 24px;
+        background: #006DD2;
+        display: block;
+        border: none;
+        color: #fff;
+        text-transform: uppercase;
+        border: 1px solid transparent;
+        min-width: 172px;
+        transition: 300ms all;
+
+        &:hover {
+            border-color: #006DD2;
+            background-color: #fff;
+            color: #006DD2;
+        }
+    }
+}
+
+.form__response-errors {
+    width: 70%;
+    margin: 0 auto;
+    color: #e22f2f;
+}
+
+.form__response-success {
+    width: 70%;
+    margin: 0 auto;
+    color: #2a8012;
+}
+
+.form__line {
+    @media(min-width:1200px) {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-column-gap: 20px;
+
+        input {
+            padding: 10px 15px;
+        }
+    }
+}
+
+.form__register {
+    color: rgba(0, 0, 0, 0.38);
+
+    p {
+        text-align: center;
+        font-size: 1.28rem;
+    }
+
+    a {
+        color: get-color(primary);
+        transition: 300ms;
+
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+}
+
+.form__input__password {
+    position: relative;
+
+    i {
+        position: absolute;
+        z-index: 1;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+
+        &:hover {
+            cursor: pointer;
+            color: get-color(orange);
+        }
+    }
+}
+
+.form__texts {
+    font-size: 1.4rem;
+    text-align: center;
+    display: block;
+    margin-bottom: 40px !important;
+}
+
+.from__return {
+    width: max-content;
+    max-width: 100%;
+    border-radius: 6px;
+    padding: 10px 24px 10px 24px;
+    background: get-color(primary);
+    display: block;
+    border: none;
+    color: #fff;
+    text-transform: uppercase;
+    min-width: 172px;
+    transition: 300ms !important;
+    margin: 0 auto;
+
+    &:hover {
+        filter: brightness(2);
+    }
+}
+
+
+.forms{
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    box-sizing: border-box;
+
+    &.is-loading {
+        .form__content *{
+            opacity: 0.5;
+            filter: grayscale(100%);
+        }
+
+        .loader {
+            opacity: 1;
+            visibility: visible;
+            transform: translate(-50%, -50%);
+        }
+    }
+
+    .loader {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, 25%);
+        opacity: 0;
+        visibility: hidden;
+        transition: 0.5s;
+    }
+
+    .loader {
+        filter: unset !important;
+
+        svg{
+            transition: unset !important;
+            filter: unset !important;
+        }
+    }
+}
