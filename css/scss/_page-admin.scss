@@ -1,0 +1,24 @@
+.page-admin{
+    a{
+        font-size: 14px;
+        font-weight: bold;
+        color: #fff;
+        text-transform: uppercase;
+        padding: 10px;
+        border-radius: 6px;
+        width: max-content;
+        display: block;
+        background-color: #006DD2;
+        transition: 400ms;
+        border: 1px solid transparent;
+        margin-top: 0;
+        text-decoration: none;
+        margin-bottom: 20px;
+    
+        &:hover{
+            background-color: #fff;
+            color: #006DD2;
+            border-color: #006DD2;
+        }
+    }
+}
