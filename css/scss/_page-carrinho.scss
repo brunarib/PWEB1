@@ -4,9 +4,30 @@
     left: 50px;
     border-top: 50px;
 }
-.carrinho-lista{
+.carrinho-modelo{
     display: flex;
+    flex-direction : row;
+    background-color: aqua;
+    
 }
-.carrinho-itens-lista{
+.carrinho-detalhes{
     display: flex;
+    background-color: yellowgreen;
+    list-style-type: none;
+    text-align: center;
+}
+.carrinho-dados{
+    display: flex;
+    background-color: blueviolet;
+    list-style-type: none;
+    text-align: center;
+}
+.carrinho-imagem{
+    display: flex;
+    width: 200px;
+    height: 200px;
+}
+.carrinho-comprar{
+    display: flex;
+    flex-direction: column;
 }
