@@ -24,7 +24,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
 
         Optional<UsuarioEntity> usuarioEntity = this.repository.findByLogin(login);
-        if(usuarioEntity.isEmpty()){
+        if(!usuarioEntity.isPresent()){
             throw new UsernameNotFoundException("Usuário Não Encontrado!");
         }
         return new UserDetailsImpl(usuarioEntity) {

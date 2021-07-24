@@ -39,7 +39,7 @@ public class UsuarioClienteController {
                                                 @RequestParam String senha) {
 
         Optional<UsuarioEntity> optUsuario = repository.findByLogin(login);
-        if (optUsuario.isEmpty()) {
+        if (!optUsuario.isPresent()) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(false);
         }
 
