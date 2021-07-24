@@ -40,7 +40,7 @@ public class JWTConfig extends WebSecurityConfigurerAdapter {
                 "/configuration/security",
                 "/swagger-ui.html",
                 "/webjars/**",
-                "/usuarioCadastro",
+                "/clientes/usuarioCadastro",
                 "/produtos");
     }
 
