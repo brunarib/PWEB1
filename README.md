@@ -35,3 +35,22 @@ FrontEnd
 - 387382 - MARIA BRUNA RIBEIRO OLIVEIRA 
 - 408867 - NICHOLAS TRECE ESCOSSIO 
 - 396061 - RICARDO RODRIGUES PEREIRA 
+
+## Passos
+Para utilizar as tecnologias desse projeto no front faça os seguintes passos
+- cd front
+- npm install
+- npm install -g gulp.
+- Para startar o projeto de gulp e uma aba vai abrir com o projeto rodando
+
+Para utilizar as tecnologia desse projeto no back faça os seguintes passos
+-crie um BD postrgre com nome PWEB_DB
+-rode o scrip ddl disponivel no repositorio
+-altere o arquivo aplication.propertie  localizado no main src com as credenciais de seu banco 
+
+No powerShell
+- cd ecommerce
+- mvn install package
+- cd target
+- java -jar .\ecommerce-0.0.1-SNAPSHOT.jar
+- A documentação back encontra-se na seguinte pagina: http://localhost:8181/swagger-ui.html#/
