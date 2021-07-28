@@ -6,20 +6,6 @@ function registerPost(url, body){
     request.setRequestHeader("Content-type", "application/json");
     request.send(JSON.stringify(body));
     
-/*
-headers.append('Content-Type', 'application/json');
-    headers.append('Accept', 'application/json');
-    headers.append('Authorization', 'Basic ' + base64.encode(username + ":" +  password));
-    headers.append('Origin','http://localhost:3000');
-
-
-
-
-
-*/
-
-
-
     request.onload = function(){
         console.log(this.responseText);
     }
@@ -46,4 +32,17 @@ function registerUser(){
         }    
     }  
     registerPost(url, body);  
+}
+function loginUser(){
+    event.preventDefault();
+    let url = "http://localhost:8181/clientes/validarSenha";
+    let login =  document.getElementById("login-user").value;
+    let senha = document.getElementById("password-login").value;
+    
+
+    body = {
+        "login" : login,
+        "senha" : senha,
+    }
+    registerPost(url, body);
 }

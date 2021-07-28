@@ -33,17 +33,17 @@
             <div class="form form--login"> <!-- Para adicionar o loader basta por a classe is-loading na linha 4 -->
                 <div class="form__content">
                     <h2>Login</h2>
-                    <form action="#">
+                    <form onsubmit="loginUser()">
                         <div class="form__input">
-                            <label for="email">E-mail</label>
-                            <input id="email" type="text">
+                            <label for="login-user">Login</label>
+                            <input id="login-user" type="text" required>
                             <span>O campo é obrigatório</span>
                         </div>
         
                         <div class="form__input">
-                            <label for="password">Senha</label>
+                            <label for="password-login">Senha</label>
                             <div class="form__input__password">
-                                <input id="password" type="password">
+                                <input id="password-login" type="password" required>
                                 <i class="far fa-eye"></i>
                             </div>
                             <span>O campo é obrigatório</span>
