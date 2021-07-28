@@ -10,7 +10,7 @@
 <body>
         <header class="container">
             <a class="inicial" href="index.html">
-                <img src="/images/home.png" alt="Pagina Incial">
+                <img src="images/home.png" alt="Pagina Incial">
             </a>
             <h1>Trabalho de Prog Web 1</h1>
             <div class="group-conta-carrinho">
@@ -33,17 +33,17 @@
             <div class="form form--login"> <!-- Para adicionar o loader basta por a classe is-loading na linha 4 -->
                 <div class="form__content">
                     <h2>Login</h2>
-                    <form action="#">
+                    <form onsubmit="loginUser()">
                         <div class="form__input">
-                            <label for="email">E-mail</label>
-                            <input id="email" type="text">
+                            <label for="login-user">Login</label>
+                            <input id="login-user" type="text" required>
                             <span>O campo é obrigatório</span>
                         </div>
         
                         <div class="form__input">
-                            <label for="password">Senha</label>
+                            <label for="password-login">Senha</label>
                             <div class="form__input__password">
-                                <input id="password" type="password">
+                                <input id="password-login" type="password" required>
                                 <i class="far fa-eye"></i>
                             </div>
                             <span>O campo é obrigatório</span>
@@ -65,21 +65,31 @@
                 <div class="form__content">
                     <h2>Cadastro</h2>
                     <p class="form__texts">Preencha o formulário abaixo para solicitar a criação da sua conta.</p>
-                    <form action="#">
+                    <form onsubmit="registerUser()">
                             <div class="form__line">
                                 <div class="form__input">
                                     <label for="name">Nome completo</label>
-                                    <input id="name" type="text">
+                                    <input id="name" type="text" required>
                                     <span>O campo é obrigatório</span>
                                 </div>
                                 <div class="form__input">
-                                    <label for="emailregister">E-mail</label>
-                                    <input id="emailregister" type="email">
+                                    <label for="adress-register">Endereço</label>
+                                    <input id="adress-register" type="text" required>
                                     <span>O campo é obrigatório</span>
                                 </div>
                                 <div class="form__input">
-                                    <label for="passwordregister">Digite sua senha</label>
-                                    <input id="passwordregister" type="password">
+                                    <label for="login-register">Login</label>
+                                    <input id="login-register" type="text" required>
+                                    <span>O campo é obrigatório</span>
+                                </div>
+                                <div class="form__input">
+                                    <label for="email-register">E-mail</label>
+                                    <input id="email-register" type="email" required>
+                                    <span>O campo é obrigatório</span>
+                                </div>
+                                <div class="form__input">
+                                    <label for="password-register">Digite sua senha</label>
+                                    <input id="password-register" type="password" required>
                                     <span>O campo é obrigatório</span>
                                 </div>
                             </div>
@@ -216,6 +226,6 @@
             </div>
         </section>
     </div>
-<script src="js/main.js"></script>
+    <script src="./js/main.js"></script>
 </body>
 </html>
