@@ -7,8 +7,11 @@ import br.com.pwebi.ecommerce.models.repositories.ClienteRepository;
 import br.com.pwebi.ecommerce.models.repositories.UsuarioRepository;
 import br.com.pwebi.ecommerce.services.interfaces.IUsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class UsuarioServiceImpl implements IUsuarioService {
@@ -41,5 +44,10 @@ public class UsuarioServiceImpl implements IUsuarioService {
         cliente.setEndereco(clienteInputDTO.getEndereco());
         this.clienteRepository.save(cliente);
 
+    }
+
+    @Override
+    public List<UsuarioEntity> listAll() {
+        return usuarioRepository.findAll();
     }
 }

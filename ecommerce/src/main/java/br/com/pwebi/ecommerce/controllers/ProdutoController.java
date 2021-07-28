@@ -26,9 +26,7 @@ public class ProdutoController {
 
         return new ResponseEntity<>(
                 produtoService.create(produtoInputDTO), HttpStatus.OK);
-
     }
-
 
     @GetMapping
     public ResponseEntity<List<ProdutoOutputDTO>>listAll()throws Exception {

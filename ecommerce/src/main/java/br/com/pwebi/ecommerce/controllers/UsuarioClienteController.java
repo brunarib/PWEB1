@@ -34,7 +34,7 @@ public class UsuarioClienteController {
         usuarioService.create(dto);
     }
 
-    @GetMapping("/validarSenha")
+  /*  @GetMapping("/validarSenha")
     public ResponseEntity<Boolean> validarSenha(@RequestParam String login,
                                                 @RequestParam String senha) {
 
@@ -48,10 +48,10 @@ public class UsuarioClienteController {
 
         HttpStatus status = (valid) ? HttpStatus.OK : HttpStatus.UNAUTHORIZED;
         return ResponseEntity.status(status).body(valid);
-    }
+    }*/
 
     @GetMapping("/listarTodos")
     public ResponseEntity<List<UsuarioEntity>> listarTodos() {
-        return ResponseEntity.ok(repository.findAll());
+        return ResponseEntity.ok(usuarioService.listAll());
     }
 }

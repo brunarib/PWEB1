@@ -41,7 +41,8 @@ public class JWTConfig extends WebSecurityConfigurerAdapter {
                 "/swagger-ui.html",
                 "/webjars/**",
                 "/clientes/usuarioCadastro",
-                "/produtos");
+                "/produtos",
+                "/categorias");
     }
 
 
@@ -80,7 +81,7 @@ public class JWTConfig extends WebSecurityConfigurerAdapter {
     private CorsConfiguration getCorsConfiguration(){
         CorsConfiguration corsConfiguration = new CorsConfiguration().applyPermitDefaultValues();
         corsConfiguration.addAllowedOrigin("*");
-
+        corsConfiguration.addAllowedHeader("*");
         corsConfiguration.addAllowedMethod("GET");
         corsConfiguration.addAllowedMethod("POST");
         corsConfiguration.addAllowedMethod("PATCH");
