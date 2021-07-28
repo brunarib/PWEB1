@@ -44,9 +44,13 @@ Para utilizar as tecnologias desse projeto no front faça os seguintes passos
 - Para startar o projeto de gulp e uma aba vai abrir com o projeto rodando
 
 Para utilizar as tecnologia desse projeto no back faça os seguintes passos
+-crie um BD postrgre com nome PWEB_DB
+-rode o scrip ddl disponivel no repositorio
+-altere o arquivo aplication.propertie  localizado no main src com as credenciais de seu banco 
 
+No powerShell
 - cd ecommerce
 - mvn install package
 - cd target
 - java -jar .\ecommerce-0.0.1-SNAPSHOT.jar
-- O back encontra-se na seguinte pagina: http://localhost:8181/swagger-ui.html#/
+- A documentação back encontra-se na seguinte pagina: http://localhost:8181/swagger-ui.html#/
