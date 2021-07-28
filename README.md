@@ -35,3 +35,10 @@ FrontEnd
 - 387382 - MARIA BRUNA RIBEIRO OLIVEIRA 
 - 408867 - NICHOLAS TRECE ESCOSSIO 
 - 396061 - RICARDO RODRIGUES PEREIRA 
+
+## Passos
+Para utilizar as tecnologias desse projeto no front faça os seguintes passos
+	cd front
+	npm install
+	npm install -g gulp.
+	Para startar o projeto de gulp e uma aba vai abrir com o projeto rodando
