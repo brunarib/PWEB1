@@ -38,7 +38,13 @@ FrontEnd
 
 ## Passos
 Para utilizar as tecnologias desse projeto no front faça os seguintes passos
-	cd front
-	npm install
-	npm install -g gulp.
-	Para startar o projeto de gulp e uma aba vai abrir com o projeto rodando
+- cd front
+- npm install
+- npm install -g gulp.
+- Para startar o projeto de gulp e uma aba vai abrir com o projeto rodando
+Para utilizar as tecnologia desse projeto no back faça os seguintes passos
+- cd ecommerce
+- mvn install package
+- cd target
+- java -jar .\ecommerce-0.0.1-SNAPSHOT.jar
+- O back encontra-se na seguinte pagina: http://localhost:8181/swagger-ui.html#/
