@@ -22,6 +22,7 @@ public class ProdutoController {
 
 
     @PostMapping("/produtoCadastro")
+    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<ProdutoOutputDTO> create(@RequestBody @Valid ProdutoInputDTO produtoInputDTO){
 
         return new ResponseEntity<>(
@@ -29,6 +30,7 @@ public class ProdutoController {
     }
 
     @GetMapping
+    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<List<ProdutoOutputDTO>>listAll()throws Exception {
         List<ProdutoOutputDTO>list = produtoService.listAll();
         return new ResponseEntity<>(list,

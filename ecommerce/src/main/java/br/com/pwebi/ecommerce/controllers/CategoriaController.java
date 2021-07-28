@@ -18,14 +18,14 @@ public class CategoriaController {
     @Autowired
     private ICategoriaService categoriaService;
 
-
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/categoriaCadastro")
     public ResponseEntity<CategoriaDTO> create( @RequestBody @Valid CategoriaInputDTO inputDTO){
         return new ResponseEntity<>(categoriaService.create(inputDTO.getDescricao()),
                 HttpStatus.OK);
     }
 
-
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping
     public ResponseEntity<List<CategoriaDTO>> listAll(){
         return new ResponseEntity<>(categoriaService.listAll(),

@@ -1,15 +1,20 @@
 //"use strict";function imc(){console.log("teste")}function hello(){console.log("holass")}
 
+
+
+
+
 function registerPost(url, body){
     let request = new XMLHttpRequest();
     request.open("POST", url, true);
-    request.setRequestHeader("Content-type", "application/json");
+    request.setRequestHeader("Content-type", "plain/text");
     request.send(JSON.stringify(body));
     
     request.onload = function(){
-        console.log(this.responseText);
+        console.log(this.status);
     }
-    return request.responseText;
+ 
+    return request.response;
 }
 function registerUser(){
     event.preventDefault();
@@ -35,7 +40,7 @@ function registerUser(){
 }
 function loginUser(){
     event.preventDefault();
-    let url = "http://localhost:8181/clientes/validarSenha";
+    let url = "http://localhost:8181/login";
     let login =  document.getElementById("login-user").value;
     let senha = document.getElementById("password-login").value;
     
@@ -46,3 +51,6 @@ function loginUser(){
     }
     registerPost(url, body);
 }
+
+
+

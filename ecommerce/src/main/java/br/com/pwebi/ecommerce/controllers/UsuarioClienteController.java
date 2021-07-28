@@ -30,6 +30,7 @@ public class UsuarioClienteController {
     }
 
     @PostMapping("/usuarioCadastro")
+    @CrossOrigin(origins = "http://localhost:3000")
     public void create(@RequestBody @Valid ClienteInputDTO dto){
         usuarioService.create(dto);
     }
@@ -51,6 +52,7 @@ public class UsuarioClienteController {
     }*/
 
     @GetMapping("/listarTodos")
+    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<List<UsuarioEntity>> listarTodos() {
         return ResponseEntity.ok(usuarioService.listAll());
     }

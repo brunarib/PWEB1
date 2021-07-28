@@ -13,6 +13,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 
 @EnableWebSecurity
@@ -63,6 +66,9 @@ public class JWTConfig extends WebSecurityConfigurerAdapter {
     }
 
 
+
+
+
     @Bean
     CorsConfigurationSource corsConfigurationSource(){
 
@@ -73,10 +79,6 @@ public class JWTConfig extends WebSecurityConfigurerAdapter {
 
         return source;
     }
-
-
-
-
 
     private CorsConfiguration getCorsConfiguration(){
         CorsConfiguration corsConfiguration = new CorsConfiguration().applyPermitDefaultValues();
