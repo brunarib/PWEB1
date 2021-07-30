@@ -318,3 +318,9 @@ input[type="checkbox"]{
         }
     }
 }
+
+.forms{
+    &.form-disabled{
+        display: none;
+    }
+}
