@@ -1,12 +1,21 @@
+let token = '';
+let formsView = document.querySelector(".forms");
+
+const logout = () => {
+    token = ''
+}
+
 function registerPost(url, body){
     let request = new XMLHttpRequest();
     request.open("POST", url, true);
     request.setRequestHeader("Content-type", "application/json");
     request.send(JSON.stringify(body));
-    
     request.onload = function(){
         console.log(this.responseText);
+        token = this.responseText
+        console.log(token)
     }
+    
     return request.responseText;
 }
 function registerUser(){
@@ -41,4 +50,14 @@ function loginUser(){
         "senha" : senha,
     }
     registerPost(url, body);
+
+    if(token !== ''){
+        formsView.classList.add("form-disabled");
+    }
+}
+
+if (document.querySelector("#nomeMyInfo")){
+    let nomeUser = document.querySelector("#nomeMyInfo");
+    console.log(nomeUser.innerHTML);
+    nomeUser.innerHTML = "meu nome";
 }
