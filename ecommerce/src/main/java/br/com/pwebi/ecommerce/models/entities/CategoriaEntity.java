@@ -18,7 +18,7 @@ import java.util.Set;
 public class CategoriaEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE	)
     @Column(name = "categoria_id", unique = true,nullable = false)
     protected  Long id;
 

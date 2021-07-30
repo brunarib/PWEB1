@@ -16,8 +16,8 @@ import javax.persistence.*;
 public class ClienteEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "cliente_id", unique = true,nullable = false)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+            @Column(name = "cliente_id", unique = true,nullable = false)
     protected  Long id;
 
     @OneToOne(fetch = FetchType.LAZY, optional = false)

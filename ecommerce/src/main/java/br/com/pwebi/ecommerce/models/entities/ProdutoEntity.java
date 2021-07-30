@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 
@@ -15,11 +16,11 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "produto")
-public class ProdutoEntity {
+public class ProdutoEntity   {
 
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE	)
     @Column(name = "produto_id", unique = true,nullable = false)
     protected  Long id;
 

@@ -1,6 +1,7 @@
 package br.com.pwebi.ecommerce.controllers;
 
 import br.com.pwebi.ecommerce.models.dtos.ClienteInputDTO;
+import br.com.pwebi.ecommerce.models.dtos.ClienteOutputDTO;
 import br.com.pwebi.ecommerce.models.entities.UsuarioEntity;
 import br.com.pwebi.ecommerce.models.repositories.UsuarioRepository;
 import br.com.pwebi.ecommerce.services.interfaces.IUsuarioService;
@@ -20,6 +21,7 @@ public class UsuarioClienteController {
 
     private final UsuarioRepository repository;
     private final PasswordEncoder encoder;
+    int count = 0;
 
     @Autowired
     private IUsuarioService usuarioService;
@@ -31,8 +33,10 @@ public class UsuarioClienteController {
 
     @PostMapping("/usuarioCadastro")
     @CrossOrigin(origins = "http://localhost:3000")
-    public void create(@RequestBody @Valid ClienteInputDTO dto){
-        usuarioService.create(dto);
+    public ResponseEntity<ClienteOutputDTO> create(@RequestBody @Valid ClienteInputDTO dto){
+        ClienteOutputDTO clienteOutputDTO = usuarioService.create(dto);
+
+        return new ResponseEntity(clienteOutputDTO,HttpStatus.CREATED);
     }
 
   /*  @GetMapping("/validarSenha")
@@ -55,5 +59,12 @@ public class UsuarioClienteController {
     @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<List<UsuarioEntity>> listarTodos() {
         return ResponseEntity.ok(usuarioService.listAll());
+    }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @GetMapping("/getCliente")
+    public ResponseEntity<ClienteOutputDTO> getCliente(@RequestHeader (
+            "Authorization") String token){
+        return new ResponseEntity(usuarioService.findByToken(token), HttpStatus.OK);
     }
 }

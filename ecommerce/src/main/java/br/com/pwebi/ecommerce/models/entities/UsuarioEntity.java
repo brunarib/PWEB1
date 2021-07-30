@@ -14,7 +14,7 @@ import javax.persistence.*;
 public class UsuarioEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE	)
     @Column(name = "usuario_id", unique = true,nullable = false)
     protected  Long id;
 

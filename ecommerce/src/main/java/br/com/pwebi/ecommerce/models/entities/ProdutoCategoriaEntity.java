@@ -15,7 +15,7 @@ import javax.persistence.*;
 public class ProdutoCategoriaEntity {
 
     @Id()
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "produto_categoria_id", unique = true,nullable = false)
     private Long produtoCategriaId;
 
