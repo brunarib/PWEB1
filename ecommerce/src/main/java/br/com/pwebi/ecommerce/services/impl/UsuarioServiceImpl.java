@@ -1,5 +1,6 @@
 package br.com.pwebi.ecommerce.services.impl;
 
+import br.com.pwebi.ecommerce.exception.ValidationException;
 import br.com.pwebi.ecommerce.models.dtos.ClienteInputDTO;
 import br.com.pwebi.ecommerce.models.dtos.ClienteOutputDTO;
 import br.com.pwebi.ecommerce.models.dtos.UsuarioOutputDTO;
@@ -10,10 +11,8 @@ import br.com.pwebi.ecommerce.models.repositories.UsuarioRepository;
 import br.com.pwebi.ecommerce.services.interfaces.IUsuarioService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sun.xml.internal.ws.handler.HandlerException;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -42,12 +41,12 @@ public class UsuarioServiceImpl implements IUsuarioService {
     }
 
     @Override
-    public ClienteOutputDTO create(ClienteInputDTO clienteInputDTO) throws HandlerException {
+    public ClienteOutputDTO create(ClienteInputDTO clienteInputDTO) throws ValidationException {
 
         Optional<UsuarioEntity> usuarioEntity =
                 this.usuarioRepository.findByLogin(clienteInputDTO.getUsuario().getLogin());
         if(usuarioEntity.isPresent()){
-            throw new HandlerException("Login já existe!");
+            throw new ValidationException("Login já existe!");
         }
 
         UsuarioEntity usuario = new UsuarioEntity();
@@ -86,7 +85,7 @@ public class UsuarioServiceImpl implements IUsuarioService {
 
 
     @Override
-    public ClienteOutputDTO findByToken(String token) throws HandlerException {
+    public ClienteOutputDTO findByToken(String token)  throws ValidationException {
 
         String username;
         String jwt;
@@ -126,7 +125,7 @@ public class UsuarioServiceImpl implements IUsuarioService {
                   .endereco(clienteEntity.getEndereco()).build();
         }
 
-        throw new HandlerException("Login já existe!");
+        throw new ValidationException("Login já existe!");
 
 
     }

@@ -1,5 +1,6 @@
 package br.com.pwebi.ecommerce.controllers;
 
+import br.com.pwebi.ecommerce.exception.ValidationException;
 import br.com.pwebi.ecommerce.models.dtos.ClienteInputDTO;
 import br.com.pwebi.ecommerce.models.dtos.ClienteOutputDTO;
 import br.com.pwebi.ecommerce.models.entities.UsuarioEntity;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/clientes")
@@ -33,7 +33,7 @@ public class UsuarioClienteController {
 
     @PostMapping("/usuarioCadastro")
     @CrossOrigin(origins = "http://localhost:3000")
-    public ResponseEntity<ClienteOutputDTO> create(@RequestBody @Valid ClienteInputDTO dto){
+    public ResponseEntity<ClienteOutputDTO> create(@RequestBody @Valid ClienteInputDTO dto)throws ValidationException {
         ClienteOutputDTO clienteOutputDTO = usuarioService.create(dto);
 
         return new ResponseEntity(clienteOutputDTO,HttpStatus.CREATED);
@@ -64,7 +64,7 @@ public class UsuarioClienteController {
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/getCliente")
     public ResponseEntity<ClienteOutputDTO> getCliente(@RequestHeader (
-            "Authorization") String token){
+            "Authorization") String token) throws ValidationException{
         return new ResponseEntity(usuarioService.findByToken(token), HttpStatus.OK);
     }
 }
