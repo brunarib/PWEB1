@@ -6,13 +6,40 @@ if(document.querySelector(".forms")){
 let logoutButton = document.getElementById('logout');
 
 if (localStorage.getItem('TOKEN-SESSION')){
-   logIn();
+   signIn();
+   if (window.location.href == "http://localhost:3000/pagina-minha-conta.html"){
+    userData();
+   }
+   
 }
 
 const logout = () => {
     token = '';
 }
+function dataGet(url, token){
+    let request = new XMLHttpRequest();
+    request.open("GET", url, false);
+    request.setRequestHeader("Authorization", "Bearer "+token);
+    request.send();
+    return request.responseText;
+}
+function userData() {
+    let urlServer = "http://localhost:8181/clientes/getCliente";
+    let token = localStorage.getItem('TOKEN-SESSION');
+    let data = dataGet(urlServer, token);
+    let response = JSON.parse(data);
+    
+    let loginUser = document.getElementById('login-client');
+    let nomeUser = document.getElementById('nome-client');
+    let emailUser = document.getElementById('email-client');
+    let enderecoUser = document.getElementById('endereco-client');
+    
+    loginUser.innerHTML = "Login: " +response.usuario.login;
+    nomeUser.innerHTML =  "Nome: " + response.usuario.nome;
+    emailUser.innerHTML= "Email: " + response.usuario.email;
+    enderecoUser.innerHTML= "Endereço: " + response.endereco; 
 
+}
 function registerPost(url, body){
     let request = new XMLHttpRequest();
     request.open("POST", url, true);
@@ -26,22 +53,22 @@ function registerPost(url, body){
 }
 function registerUser(){
     event.preventDefault();
-    let url = "http://localhost:8181/clientes/usuarioCadastro";
-    let nome = document.getElementById("name").value;
-    let login =  document.getElementById("login-register").value;
-    let email = document.getElementById("email-register").value ;
-    let senha = document.getElementById("password-register").value;
-    let endereco = document.getElementById("adress-register").value;
-    let body = {"endereco": endereco,
+    let urlServer = "http://localhost:8181/clientes/usuarioCadastro";
+    let nomeServer = document.getElementById("name-register").value;
+    let loginServer =  document.getElementById("login-register").value;
+    let emailServer = document.getElementById("email-register").value ;
+    let senhaServer = document.getElementById("password-register").value;
+    let enderecoServer = document.getElementById("adress-register").value;
+    let bodyServer = {"endereco": enderecoServer,
         "usuario": {
         "adm": "false",
-        "email": email,
-        "login": login,
-        "nome": nome,
-        "senha": senha,
+        "email": emailServer,
+        "login": loginServer,
+        "nome": nomeServer,
+        "senha": senhaServer,
         }    
     }  
-    registerPost(url, body);  
+    registerPost(urlServer, bodyServer);  
 }
 function loginUser(){
     event.preventDefault();
@@ -59,8 +86,7 @@ function loginUser(){
         if(document.querySelector(".forms")){
             formsView.classList.add("form-disabled");
         }
-    }
-    
+    }   
 }
 
 if (document.querySelector("#nomeMyInfo")){
@@ -69,17 +95,17 @@ if (document.querySelector("#nomeMyInfo")){
     nomeUser.innerHTML = "meu nome";
 }
 
-function logIn(){
+function signIn(){
     if(document.querySelector(".forms")){
         formsView.classList.add('form-disabled');
     }
     logoutButton.classList.add("is-active");
-    let userLoging = localStorage.getItem('LOGIN-SESSION');
+    let userSignIn = localStorage.getItem('LOGIN-SESSION');
     let user = document.getElementById('user');
-    user.innerHTML = userLoging;      
+    user.innerHTML = userSignIn;      
 }
 
-function logOut(){
+function singOut(){
     localStorage.clear();
     logoutButton.classList.remove("is-active");
     let user = document.getElementById('user');
@@ -87,5 +113,6 @@ function logOut(){
     if (document.querySelector(".forms")){
         formsView.classList.add('form-enable');
     }
-    
+    window.open("http://localhost:3000/index.html","_self")
 }
+

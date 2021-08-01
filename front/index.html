@@ -21,7 +21,7 @@
                     <img src="images/user-image.png" alt="">
                 </a>
                 <div id="user"></div>
-                <button id="logout" onclick="logOut()">Logout</button> 
+                <button id="logout" onclick="singOut()">Logout</button> 
                 <a href="page-cart.html" class="cart-container">
                     <img src="images/cart.png" alt="">
                     <div class="cart__itens">
@@ -45,7 +45,7 @@
                         <div class="form__input">
                             <label for="password-login">Senha</label>
                             <div class="form__input__password">
-                                <input id="password-login" type="password" required>
+                                <input id="password-login" autocomplete="off" type="password" required>
                                 <i class="far fa-eye"></i>
                             </div>
                             <span>O campo é obrigatório</span>
@@ -70,8 +70,8 @@
                     <form onsubmit="registerUser()">
                             <div class="form__line">
                                 <div class="form__input">
-                                    <label for="name">Nome completo</label>
-                                    <input id="name" type="text" required>
+                                    <label for="name-register">Nome completo</label>
+                                    <input id="name-name-register" type="text" required>
                                     <span>O campo é obrigatório</span>
                                 </div>
                                 <div class="form__input">
@@ -91,7 +91,7 @@
                                 </div>
                                 <div class="form__input">
                                     <label for="password-register">Digite sua senha</label>
-                                    <input id="password-register" type="password" required>
+                                    <input id="password-register"  autocomplete="off" type="password" required>
                                     <span>O campo é obrigatório</span>
                                 </div>
                             </div>

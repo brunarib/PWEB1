@@ -20,7 +20,7 @@
             <img src="images/user-image.png" alt="">
         </a>
         <div id="user"></div>
-        <button id="logout" onclick="logOut()">Logout</button>
+        <button id="logout" onclick="singOut()">Logout</button> 
         <a href="page-cart.html" class="cart-container">
             <img src="images/cart.png" alt="">
             <div class="cart__itens">
@@ -51,11 +51,10 @@
             </div>
         <div class="minha-conta-display">
             <div class="content-info-conta">
-                <p class="text-info-user">Nome: Nome do Usuário</p>
-                <p class="text-info-user">Email: Example@example.com</p>
-                <p class="text-info-user">Telefone: (00) 00000 - 0000</p>
-                <p class="text-info-user">Endereço: Rua Example, 0</p>
-                <p class="text-info-user">CEP: 00000-000</p>
+                <p id="login-config" class="text-info-user">User: X</p>
+                <p id="nome-config" class="text-info-user">Nome: Nome do Usuário</p>
+                <p id="email-config" class="text-info-user" >Email: Example@example.com</p>
+                <p id="endereco-config" class="text-info-user" >Endereço: Rua Example, 0</p>
             </div>
             <div class="edit-info-conta">
                 <a href="#">Editar informações</a>
