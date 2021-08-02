@@ -14,13 +14,16 @@
         </a>
         <h1>Carrinho</h1>
         <div class="group-conta-carrinho">
-            <a class="minha-conta" id="minha-conta" href="pagina-minha-conta.html" >
-                Minha Conta </a>
-            <a href="#" class="user-container">
-                <img src="images/user-image.png" alt="">
-            </a>        
-            <div id="user"></div>
-            <button id="logout" onclick="singOut()">Logout</button>  
+            <div  class="conta-user" id="conta-user">
+                <p>olá,&nbsp;</p>
+                <p id="user" ></p>
+            </div>
+            <a href="pagina-minha-conta.html" class="minha-conta" id="minha-conta">
+                <img src="images/user-image.png" alt="Minha Conta">
+            </a>
+            <a href="#" id="logout" class="minha-conta" onclick="singOut()" >
+                <img src="images/logout-icon.png" alt="">
+            </a>
             <a href="page-cart.html" class="cart-container">
                 <img src="images/cart.png" alt="">
                 <div class="cart__itens">

@@ -5,6 +5,9 @@ if(document.querySelector(".forms")){
 }
 let logoutButton = document.getElementById('logout');
 let conta = document.getElementById("minha-conta");
+let userConta = document.getElementById("conta-user");
+
+
 
 if (localStorage.getItem('TOKEN-SESSION')){
    signIn();
@@ -56,10 +59,21 @@ function registerUser(){
     event.preventDefault();
     let urlServer = "http://localhost:8181/clientes/usuarioCadastro";
     let nomeServer = document.getElementById("name-register").value;
+    console.log(nomeServer);
     let loginServer =  document.getElementById("login-register").value;
-    let emailServer = document.getElementById("email-register").value ;
+    console.log(loginServer);
+    let emailServer = document.getElementById("email-register").value;
+    console.log(emailServer);
     let senhaServer = document.getElementById("password-register").value;
+    console.log(senhaServer);
     let enderecoServer = document.getElementById("adress-register").value;
+    console.log(enderecoServer);
+  
+   
+    
+   
+    
+
     let bodyServer = {"endereco": enderecoServer,
         "usuario": {
         "adm": "false",
@@ -69,7 +83,9 @@ function registerUser(){
         "senha": senhaServer,
         }    
     }  
-    registerPost(urlServer, bodyServer);  
+    registerPost(urlServer, bodyServer);
+    alert("Usuario Cadastrado!");  
+
 }
 function loginUser(){
     event.preventDefault();
@@ -86,14 +102,11 @@ function loginUser(){
     if(token !== ''){
         if(document.querySelector(".forms")){
             formsView.classList.add("form-disabled");
+            signIn()
         }
     }   
-}
 
-if (document.querySelector("#nomeMyInfo")){
-    let nomeUser = document.querySelector("#nomeMyInfo");
-    console.log(nomeUser.innerHTML);
-    nomeUser.innerHTML = "meu nome";
+   
 }
 
 function signIn(){
@@ -102,6 +115,7 @@ function signIn(){
     }
     conta.classList.add("is-active");
     logoutButton.classList.add("is-active");
+    userConta.classList.add("is-active");
     let userSignIn = localStorage.getItem('LOGIN-SESSION');
     let user = document.getElementById('user');
     user.innerHTML = userSignIn;      
@@ -111,6 +125,7 @@ function singOut(){
     localStorage.clear();
     conta.classList.remove("is-active");
     logoutButton.classList.remove("is-active");
+    userConta.classList.remove("is-active");
     let user = document.getElementById('user');
     user.innerHTML = "";
     if (document.querySelector(".forms")){
