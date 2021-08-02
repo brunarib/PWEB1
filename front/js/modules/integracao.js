@@ -1,59 +1,92 @@
 let token = '';
 let formsView = document.querySelector(".forms");
+if(document.querySelector(".forms")){
+     
+}
+let logoutButton = document.getElementById('logout');
 
-const logout = () => {
-    token = ''
+if (localStorage.getItem('TOKEN-SESSION')){
+   signIn();
+   if (window.location.href == "http://localhost:3000/pagina-minha-conta.html"){
+    userData();
+   }
+   
 }
 
+const logout = () => {
+    token = '';
+}
+function dataGet(url, token){
+    let request = new XMLHttpRequest();
+    request.open("GET", url, false);
+    request.setRequestHeader("Authorization", "Bearer "+token);
+    request.send();
+    return request.responseText;
+}
+function userData() {
+    let urlServer = "http://localhost:8181/clientes/getCliente";
+    let token = localStorage.getItem('TOKEN-SESSION');
+    let data = dataGet(urlServer, token);
+    let response = JSON.parse(data);
+    
+    let loginUser = document.getElementById('login-client');
+    let nomeUser = document.getElementById('nome-client');
+    let emailUser = document.getElementById('email-client');
+    let enderecoUser = document.getElementById('endereco-client');
+    
+    loginUser.innerHTML = "Login: " +response.usuario.login;
+    nomeUser.innerHTML =  "Nome: " + response.usuario.nome;
+    emailUser.innerHTML= "Email: " + response.usuario.email;
+    enderecoUser.innerHTML= "Endereço: " + response.endereco; 
+
+}
 function registerPost(url, body){
     let request = new XMLHttpRequest();
     request.open("POST", url, true);
     request.setRequestHeader("Content-type", "application/json");
     request.send(JSON.stringify(body));
     request.onload = function(){
-        console.log(this.responseText);
-        token = this.responseText
-        console.log(token)
-    }
-    
+    token = this.responseText
+    localStorage.setItem("TOKEN-SESSION", token);
+    }   
     return request.responseText;
 }
 function registerUser(){
     event.preventDefault();
-    let url = "http://localhost:8181/clientes/usuarioCadastro";
-    let nome = document.getElementById("name").value;
-    let login =  document.getElementById("login-register").value;
-    let email = document.getElementById("email-register").value ;
-    let senha = document.getElementById("password-register").value;
-    let endereco = document.getElementById("adress-register").value;
-    console.log(nome, login, email, senha, endereco);
-
-    let body = {"endereco": endereco,
+    let urlServer = "http://localhost:8181/clientes/usuarioCadastro";
+    let nomeServer = document.getElementById("name-register").value;
+    let loginServer =  document.getElementById("login-register").value;
+    let emailServer = document.getElementById("email-register").value ;
+    let senhaServer = document.getElementById("password-register").value;
+    let enderecoServer = document.getElementById("adress-register").value;
+    let bodyServer = {"endereco": enderecoServer,
         "usuario": {
         "adm": "false",
-        "email": email,
-        "login": login,
-        "nome": nome,
-        "senha": senha,
+        "email": emailServer,
+        "login": loginServer,
+        "nome": nomeServer,
+        "senha": senhaServer,
         }    
     }  
-    registerPost(url, body);  
+    registerPost(urlServer, bodyServer);  
 }
 function loginUser(){
     event.preventDefault();
     let url = "http://localhost:8181/login";
-    let login =  document.getElementById("login-user").value;
-    let senha = document.getElementById("password-login").value;
-    
-
-    let body = {"login" : login,
-        "senha" : senha,
+    let login =  document.getElementById('login-user').value;
+    let senha = document.getElementById('password-login').value;
+    localStorage.setItem('LOGIN-SESSION', login);
+    localStorage.setItem('SENHA-SESSION', senha);  
+    let body = {'login' : login,
+        'senha' : senha,
     }
     registerPost(url, body);
 
     if(token !== ''){
-        formsView.classList.add("form-disabled");
-    }
+        if(document.querySelector(".forms")){
+            formsView.classList.add("form-disabled");
+        }
+    }   
 }
 
 if (document.querySelector("#nomeMyInfo")){
@@ -61,3 +94,25 @@ if (document.querySelector("#nomeMyInfo")){
     console.log(nomeUser.innerHTML);
     nomeUser.innerHTML = "meu nome";
 }
+
+function signIn(){
+    if(document.querySelector(".forms")){
+        formsView.classList.add('form-disabled');
+    }
+    logoutButton.classList.add("is-active");
+    let userSignIn = localStorage.getItem('LOGIN-SESSION');
+    let user = document.getElementById('user');
+    user.innerHTML = userSignIn;      
+}
+
+function singOut(){
+    localStorage.clear();
+    logoutButton.classList.remove("is-active");
+    let user = document.getElementById('user');
+    user.innerHTML = "";
+    if (document.querySelector(".forms")){
+        formsView.classList.add('form-enable');
+    }
+    window.open("http://localhost:3000/index.html","_self")
+}
+

@@ -12,3 +12,11 @@ header{
     z-index: 99;
     box-shadow: 0 0.2rem 0.7rem rgba(#000, 0.1)
 }
+
+#logout{
+    display: none;
+
+    &.is-active{
+        display: block;
+    }
+}
