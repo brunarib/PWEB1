@@ -4,6 +4,7 @@ if(document.querySelector(".forms")){
      
 }
 let logoutButton = document.getElementById('logout');
+let conta = document.getElementById("minha-conta");
 
 if (localStorage.getItem('TOKEN-SESSION')){
    signIn();
@@ -99,6 +100,7 @@ function signIn(){
     if(document.querySelector(".forms")){
         formsView.classList.add('form-disabled');
     }
+    conta.classList.add("is-active");
     logoutButton.classList.add("is-active");
     let userSignIn = localStorage.getItem('LOGIN-SESSION');
     let user = document.getElementById('user');
@@ -107,6 +109,7 @@ function signIn(){
 
 function singOut(){
     localStorage.clear();
+    conta.classList.remove("is-active");
     logoutButton.classList.remove("is-active");
     let user = document.getElementById('user');
     user.innerHTML = "";
