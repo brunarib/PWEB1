@@ -20,3 +20,10 @@ header{
         display: block;
     }
 }
+#minha-conta{
+    display: none;
+
+    &.is-active{
+        display: block;
+    }
+}
