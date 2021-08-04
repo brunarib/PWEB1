@@ -39,8 +39,15 @@ public class ProdutoEntity   {
     @Column(name = "foto",length = 429496729)
     private byte[] foto;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "produto")
+    /*@OneToMany(fetch = FetchType.LAZY, mappedBy = "produto")
     private Set<ProdutoCategoriaEntity> produtoCategoriaEntities;
+*/
+
+    @ManyToMany
+    @JoinTable(name="produto_categoria", joinColumns=
+            {@JoinColumn(name="produto_id")}, inverseJoinColumns=
+            {@JoinColumn(name="categoria_id")})
+    private List<CategoriaEntity> categorias;
 
 
 

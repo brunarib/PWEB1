@@ -5,10 +5,10 @@ import br.com.pwebi.ecommerce.models.dtos.ProdutoInputDTO;
 import br.com.pwebi.ecommerce.models.dtos.ProdutoOutputDTO;
 import br.com.pwebi.ecommerce.models.entities.CategoriaEntity;
 
-import br.com.pwebi.ecommerce.models.entities.ProdutoCategoriaEntity;
+
 import br.com.pwebi.ecommerce.models.entities.ProdutoEntity;
 
-import br.com.pwebi.ecommerce.models.repositories.ProdutoCategoriaRepository;
+
 import br.com.pwebi.ecommerce.models.repositories.ProdutoRepository;
 import br.com.pwebi.ecommerce.services.interfaces.IProdutoService;
 import org.springframework.stereotype.Service;
@@ -22,11 +22,11 @@ import java.util.stream.Collectors;
 public class ProdutoServiceImpl  implements IProdutoService {
 
     private final ProdutoRepository repository;
-    private final ProdutoCategoriaRepository produtoCategoriaRepository;
 
-    public ProdutoServiceImpl(ProdutoRepository repository, ProdutoCategoriaRepository produtoCategoriaRepository){
+
+    public ProdutoServiceImpl(ProdutoRepository repository){
         this.repository = repository;
-        this.produtoCategoriaRepository = produtoCategoriaRepository;
+
 
 
     }
@@ -35,28 +35,33 @@ public class ProdutoServiceImpl  implements IProdutoService {
     public ProdutoOutputDTO create(ProdutoInputDTO inputDTO) {
 
         //seta categoria do produto
+        List<CategoriaEntity > categorias = new ArrayList<>();
         CategoriaEntity categoriaEntity = new CategoriaEntity();
         categoriaEntity.setId(inputDTO.getCategoria().getCategoriaId());
         categoriaEntity.setDescricao(inputDTO.getCategoria().getDescricao());
+        categorias.add(categoriaEntity);
 
         //seta e salva o produto
         ProdutoEntity produtoEntity = new ProdutoEntity();
         produtoEntity.setDescricao(inputDTO.getDescricaoProduto());
         produtoEntity.setPreco(inputDTO.getPreco());
         produtoEntity.setQuantidadeEstoque(inputDTO.getQuantidadeEstoque());
+        produtoEntity.setCategorias(categorias);
         ProdutoEntity produtoSalvo = this.repository.save(produtoEntity);
 
         //seta e salva o relacionamento produto categoria
-        ProdutoCategoriaEntity produtoCategoriaEntity= new ProdutoCategoriaEntity();
-        produtoCategoriaEntity.setProduto(produtoSalvo);
-        produtoCategoriaEntity.setCategoria(categoriaEntity);
-        produtoCategoriaRepository.save(produtoCategoriaEntity);
+//        ProdutoCategoriaEntity produtoCategoriaEntity= new ProdutoCategoriaEntity();
+//        produtoCategoriaEntity.setProduto(produtoSalvo);
+//        produtoCategoriaEntity.setCategoria(categoriaEntity);
+//        produtoCategoriaRepository.save(produtoCategoriaEntity);
 
-        ProdutoEntity produtoCategoria =
-                this.repository.getOne(produtoSalvo.getId());
+        ProdutoEntity produtoCategoria = this.repository.getOne(produtoSalvo.getId());
 
-        List<CategoriaDTO> categoriaDTO =
-                parseCategoriaList(produtoCategoria.getProdutoCategoriaEntities());
+//        System.out.println("--------------------------");
+//
+//        System.out.println(produtoCategoria==null);
+//        System.out.println(produtoCategoria.getProdutoCategoriaEntities()==null);
+       List<CategoriaDTO> categoriaDTO =parseCategoriaList(produtoSalvo.getCategorias());
 
         return new ProdutoOutputDTO().
                 builder()
@@ -81,7 +86,7 @@ public class ProdutoServiceImpl  implements IProdutoService {
         for (ProdutoEntity e: entityList ){
 
             List<CategoriaDTO> categoriaDTO =
-                    parseCategoriaList(e.getProdutoCategoriaEntities());
+                    parseCategoriaList(e.getCategorias());
 
 
             outputDTOList.add(new ProdutoOutputDTO().
@@ -97,10 +102,10 @@ public class ProdutoServiceImpl  implements IProdutoService {
     }
 
 
-    private List<CategoriaDTO> parseCategoriaList(Set<ProdutoCategoriaEntity> categoriaEntities) {
+    private List<CategoriaDTO> parseCategoriaList(List<CategoriaEntity> categoriaEntities) {
         return   categoriaEntities.stream().map(r -> CategoriaDTO.builder()
-                .categoriaId(r.getCategoria().getId())
-                .descricao(r.getCategoria().getDescricao())
+                .categoriaId(r.getId())
+                .descricao(r.getDescricao())
                 .build()
         ).collect(Collectors.toList());
     }

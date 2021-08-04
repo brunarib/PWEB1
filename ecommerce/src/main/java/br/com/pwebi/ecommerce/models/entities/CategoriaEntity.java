@@ -25,7 +25,7 @@ public class CategoriaEntity {
 
     @Column(name = "descricao", unique = true, nullable = false)
     protected  String descricao;
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "categoria")
-    private Set<ProdutoCategoriaEntity> produtoCategoriaEntities;
+//
+//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "categoria")
+//    private Set<ProdutoCategoriaEntity> produtoCategoriaEntities;
 }
