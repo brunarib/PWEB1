@@ -89,6 +89,13 @@ img{
     top: 400px;
     padding: 10px;
 }
+
 .edit-info-conta{
     bottom: 200px;
+
+    .input-item{
+        display: flex;
+        flex-direction: column;
+    }
 }
+
