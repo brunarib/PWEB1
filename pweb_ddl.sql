@@ -6,7 +6,6 @@
 -- Dumped by pg_dump version 13.1
 
 -- Started on 2021-07-07 12:06:34
-
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 SET idle_in_transaction_session_timeout = 0;
@@ -233,8 +232,9 @@ ALTER TABLE ONLY public.compra
 --
 
 ALTER TABLE ONLY public.produto_categoria
-    ADD CONSTRAINT produto_categoria_fk FOREIGN KEY (categoria_id) REFERENCES public.categoria(categoria_id);
-
+    ADD CONSTRAINT produto_categoria_fk FOREIGN KEY (categoria_id) REFERENCES public.categoria(categoria_id) MATCH SIMPLE
+   	ON UPDATE CASCADE
+    ON DELETE cascade;
 
 --
 -- TOC entry 2737 (class 2606 OID 75644)
@@ -242,7 +242,10 @@ ALTER TABLE ONLY public.produto_categoria
 --
 
 ALTER TABLE ONLY public.produto_categoria
-    ADD CONSTRAINT produto_categoria_fk_1 FOREIGN KEY (produto_id) REFERENCES public.produto(produto_id);
+    ADD CONSTRAINT produto_categoria_fk_1 FOREIGN KEY (produto_id) REFERENCES public.produto(produto_id)
+    MATCH SIMPLE
+   	ON UPDATE CASCADE
+    ON DELETE cascade;
 
 
 --
