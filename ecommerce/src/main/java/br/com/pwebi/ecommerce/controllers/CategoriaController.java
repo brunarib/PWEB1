@@ -2,6 +2,8 @@ package br.com.pwebi.ecommerce.controllers;
 
 import br.com.pwebi.ecommerce.models.dtos.CategoriaDTO;
 import br.com.pwebi.ecommerce.models.dtos.CategoriaInputDTO;
+import br.com.pwebi.ecommerce.models.dtos.ProdutoInputUpdateDTO;
+import br.com.pwebi.ecommerce.models.dtos.ProdutoOutputDTO;
 import br.com.pwebi.ecommerce.services.interfaces.ICategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -33,5 +35,21 @@ public class CategoriaController {
                 HttpStatus.OK);
     }
 
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping("/deletar")
+    public ResponseEntity<Void> delete(@Valid @RequestParam("categoriaId") long categoriaId) {
+        categoriaService.delete(categoriaId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @PutMapping("/editar")
+    public ResponseEntity<CategoriaDTO> update(@Valid @RequestBody CategoriaDTO dto) {
+        CategoriaDTO categoriaDTO = categoriaService.update(dto);
+
+        return new ResponseEntity<>(categoriaDTO,HttpStatus.OK);
+    }
 
 }

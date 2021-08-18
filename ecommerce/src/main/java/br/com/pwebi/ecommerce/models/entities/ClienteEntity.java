@@ -1,9 +1,6 @@
 package br.com.pwebi.ecommerce.models.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -12,6 +9,7 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder(toBuilder = true)
 @Table(name = "cliente")
 public class ClienteEntity {
 
@@ -20,7 +18,7 @@ public class ClienteEntity {
             @Column(name = "cliente_id", unique = true,nullable = false)
     protected  Long id;
 
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @OneToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name = "usuario_id")
     protected UsuarioEntity usuario;
 

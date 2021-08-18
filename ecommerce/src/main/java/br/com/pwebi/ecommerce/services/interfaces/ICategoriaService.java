@@ -9,4 +9,8 @@ public interface ICategoriaService {
     CategoriaDTO create(String descricao);
 
     List<CategoriaDTO> listAll();
+
+    CategoriaDTO update(CategoriaDTO dto);
+
+    void delete(long categoriaId);
 }

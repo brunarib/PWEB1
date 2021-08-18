@@ -15,5 +15,5 @@ public class UsuarioInputDTO {
     private String login;
     private String senha;
     private String email;
-    private boolean isAdm;
+
 }

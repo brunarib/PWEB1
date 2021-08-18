@@ -2,6 +2,7 @@ package br.com.pwebi.ecommerce.services.interfaces;
 
 import br.com.pwebi.ecommerce.exception.ValidationException;
 import br.com.pwebi.ecommerce.models.dtos.ClienteInputDTO;
+import br.com.pwebi.ecommerce.models.dtos.ClienteInputUpdateDTO;
 import br.com.pwebi.ecommerce.models.dtos.ClienteOutputDTO;
 import br.com.pwebi.ecommerce.models.entities.UsuarioEntity;
 
@@ -14,4 +15,8 @@ public interface IUsuarioService {
     List<UsuarioEntity> listAll();
 
     ClienteOutputDTO findByToken(String token) throws ValidationException;
+
+    void delete(long clienteId);
+
+    ClienteOutputDTO update(ClienteInputUpdateDTO clienteInputDTO) throws ValidationException;
 }

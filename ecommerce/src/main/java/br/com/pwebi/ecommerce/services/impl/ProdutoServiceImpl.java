@@ -2,6 +2,7 @@ package br.com.pwebi.ecommerce.services.impl;
 
 import br.com.pwebi.ecommerce.models.dtos.CategoriaDTO;
 import br.com.pwebi.ecommerce.models.dtos.ProdutoInputDTO;
+import br.com.pwebi.ecommerce.models.dtos.ProdutoInputUpdateDTO;
 import br.com.pwebi.ecommerce.models.dtos.ProdutoOutputDTO;
 import br.com.pwebi.ecommerce.models.entities.CategoriaEntity;
 
@@ -34,12 +35,8 @@ public class ProdutoServiceImpl  implements IProdutoService {
     @Override
     public ProdutoOutputDTO create(ProdutoInputDTO inputDTO) {
 
-        //seta categoria do produto
-        List<CategoriaEntity > categorias = new ArrayList<>();
-        CategoriaEntity categoriaEntity = new CategoriaEntity();
-        categoriaEntity.setId(inputDTO.getCategoria().getCategoriaId());
-        categoriaEntity.setDescricao(inputDTO.getCategoria().getDescricao());
-        categorias.add(categoriaEntity);
+        //seta categorias do produto
+        List<CategoriaEntity> categorias = parseCategoriaEntityList(inputDTO.getCategorias());
 
         //seta e salva o produto
         ProdutoEntity produtoEntity = new ProdutoEntity();
@@ -49,19 +46,7 @@ public class ProdutoServiceImpl  implements IProdutoService {
         produtoEntity.setCategorias(categorias);
         ProdutoEntity produtoSalvo = this.repository.save(produtoEntity);
 
-        //seta e salva o relacionamento produto categoria
-//        ProdutoCategoriaEntity produtoCategoriaEntity= new ProdutoCategoriaEntity();
-//        produtoCategoriaEntity.setProduto(produtoSalvo);
-//        produtoCategoriaEntity.setCategoria(categoriaEntity);
-//        produtoCategoriaRepository.save(produtoCategoriaEntity);
-
-        ProdutoEntity produtoCategoria = this.repository.getOne(produtoSalvo.getId());
-
-//        System.out.println("--------------------------");
-//
-//        System.out.println(produtoCategoria==null);
-//        System.out.println(produtoCategoria.getProdutoCategoriaEntities()==null);
-       List<CategoriaDTO> categoriaDTO =parseCategoriaList(produtoSalvo.getCategorias());
+        List<CategoriaDTO> categoriaDTO =parseCategoriaDTOList(produtoSalvo.getCategorias());
 
         return new ProdutoOutputDTO().
                 builder()
@@ -71,23 +56,16 @@ public class ProdutoServiceImpl  implements IProdutoService {
                 .preco(produtoSalvo.getPreco())
                 .quantidadeEstoque(produtoSalvo.getQuantidadeEstoque())
                 .build();
-
-
-
     }
 
     @Override
     public List<ProdutoOutputDTO> listAll() {
         List<ProdutoEntity>  entityList = this.repository.findAll();
 
-
         List<ProdutoOutputDTO> outputDTOList = new ArrayList<>();
-
         for (ProdutoEntity e: entityList ){
-
             List<CategoriaDTO> categoriaDTO =
-                    parseCategoriaList(e.getCategorias());
-
+                    parseCategoriaDTOList(e.getCategorias());
 
             outputDTOList.add(new ProdutoOutputDTO().
                     builder()
@@ -101,12 +79,68 @@ public class ProdutoServiceImpl  implements IProdutoService {
         return outputDTOList;
     }
 
-
-    private List<CategoriaDTO> parseCategoriaList(List<CategoriaEntity> categoriaEntities) {
+    private List<CategoriaDTO> parseCategoriaDTOList(List<CategoriaEntity> categoriaEntities) {
         return   categoriaEntities.stream().map(r -> CategoriaDTO.builder()
                 .categoriaId(r.getId())
                 .descricao(r.getDescricao())
                 .build()
         ).collect(Collectors.toList());
+    }
+
+    private List<CategoriaEntity> parseCategoriaEntityList(List<CategoriaDTO> categoriaEntities) {
+        return   categoriaEntities.stream().map(r -> CategoriaEntity.builder()
+                .id(r.getCategoriaId())
+                .descricao(r.getDescricao())
+                .build()
+        ).collect(Collectors.toList());
+    }
+
+
+    @Override
+    public ProdutoOutputDTO update(ProdutoInputUpdateDTO inputDTO) {
+
+        ProdutoEntity produtoEntity =
+                repository.getOne(inputDTO.getProdutoId());
+
+        if(produtoEntity!=null) {
+            //seta categoria do produto
+
+            List<CategoriaEntity> categorias =  parseCategoriaEntityList(inputDTO.getCategorias());
+
+            //seta e salva o produto
+            ProdutoEntity produto = produtoEntity;
+            produto.setDescricao(inputDTO.getDescricaoProduto());
+            produto.setPreco(inputDTO.getPreco());
+            produto.setQuantidadeEstoque(inputDTO.getQuantidadeEstoque());
+            produto.setCategorias(categorias);
+            ProdutoEntity produtoSalvo = this.repository.save(produto);
+
+            List<CategoriaDTO> categoriaDTO = parseCategoriaDTOList(produtoSalvo.getCategorias());
+
+            return new ProdutoOutputDTO().
+                    builder()
+                    .produtoId(produtoSalvo.getId())
+                    .descricaoProduto(produtoSalvo.getDescricao())
+                    .categoria(categoriaDTO)
+                    .preco(produtoSalvo.getPreco())
+                    .quantidadeEstoque(produtoSalvo.getQuantidadeEstoque())
+                    .build();
+        }
+
+        return new ProdutoOutputDTO().
+                builder()
+                .produtoId(produtoEntity.getId())
+                .descricaoProduto(produtoEntity.getDescricao())
+                .categoria(parseCategoriaDTOList(produtoEntity.getCategorias()))
+                .preco(produtoEntity.getPreco())
+                .quantidadeEstoque(produtoEntity.getQuantidadeEstoque())
+                .build();
+    }
+
+
+    @Override
+    public void delete(long produtoId) {
+        repository.deleteById(produtoId);
+
     }
 }

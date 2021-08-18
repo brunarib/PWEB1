@@ -10,6 +10,7 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder(toBuilder = true)
 @Table(name = "usuarios")
 public class UsuarioEntity {
 
@@ -33,7 +34,5 @@ public class UsuarioEntity {
 
     @Column(name = "is_adm", nullable = false, columnDefinition = "false")
     protected boolean isAdm;
-
-
 
 }

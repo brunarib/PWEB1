@@ -49,4 +49,32 @@ public class CategoriaServiceImpl implements ICategoriaService {
 
         return categoriaDTOList;
     }
+
+
+    @Override
+    public CategoriaDTO update(CategoriaDTO dto) {
+        CategoriaEntity categoriaEntity = repository.getOne(dto.getCategoriaId());
+        if (categoriaEntity != null) {
+            categoriaEntity.setDescricao(dto.getDescricao());
+            CategoriaEntity categoriaSalvo = this.repository.save(categoriaEntity);
+
+            return new CategoriaDTO()
+                    .builder()
+                    .categoriaId(categoriaSalvo.getId())
+                    .descricao(categoriaSalvo.getDescricao())
+                    .build();
+        }
+        return new CategoriaDTO()
+                .builder()
+                .categoriaId(categoriaEntity.getId())
+                .descricao(categoriaEntity.getDescricao())
+                .build();
+    }
+
+    @Override
+    public void delete(long categoriaId) {
+        repository.deleteById(categoriaId);
+
+    }
+
 }

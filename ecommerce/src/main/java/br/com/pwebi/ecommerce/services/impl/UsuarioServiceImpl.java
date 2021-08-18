@@ -2,6 +2,7 @@ package br.com.pwebi.ecommerce.services.impl;
 
 import br.com.pwebi.ecommerce.exception.ValidationException;
 import br.com.pwebi.ecommerce.models.dtos.ClienteInputDTO;
+import br.com.pwebi.ecommerce.models.dtos.ClienteInputUpdateDTO;
 import br.com.pwebi.ecommerce.models.dtos.ClienteOutputDTO;
 import br.com.pwebi.ecommerce.models.dtos.UsuarioOutputDTO;
 import br.com.pwebi.ecommerce.models.entities.ClienteEntity;
@@ -18,10 +19,8 @@ import org.springframework.stereotype.Service;
 
 import org.apache.commons.codec.binary.Base64;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import javax.persistence.EntityNotFoundException;
+import java.util.*;
 
 @Service
 public class UsuarioServiceImpl implements IUsuarioService {
@@ -84,6 +83,7 @@ public class UsuarioServiceImpl implements IUsuarioService {
     }
 
 
+
     @Override
     public ClienteOutputDTO findByToken(String token)  throws ValidationException {
 
@@ -131,14 +131,76 @@ public class UsuarioServiceImpl implements IUsuarioService {
     }
 
 
-
-        private ClienteEntity getUserIdByUsername(String user) {
+    private ClienteEntity getUserIdByUsername(String user) {
             UsuarioEntity userEntity = usuarioRepository.findEntityByLogin(user);
 
             ClienteEntity cliente = clienteRepository.findByUsuario(userEntity);
 
             return   cliente;
         }
+
+
+    @Override
+    public void delete(long clienteId) {
+        clienteRepository.deleteById(clienteId);
+
+    }
+
+    private UsuarioEntity getUserEntity(long userId) throws EntityNotFoundException {
+        return usuarioRepository.findById(userId)
+                .orElseThrow(() -> new EntityNotFoundException("User not found."));
+    }
+
+
+    @Override
+    public ClienteOutputDTO update(ClienteInputUpdateDTO clienteInputDTO) throws ValidationException {
+
+       ClienteEntity clienteEntity =
+               this.clienteRepository.getOne(clienteInputDTO.getId());
+       if(clienteEntity !=null) {
+
+           UsuarioEntity usuario = clienteEntity.getUsuario();
+           if (!usuario.isAdm()){
+               usuario.setAdm(false);
+           }
+           usuario.setEmail(clienteInputDTO.getUsuario().getEmail());
+           usuario.setLogin(clienteInputDTO.getUsuario().getLogin());
+           usuario.setNome(clienteInputDTO.getUsuario().getNome());
+           usuario.setSenha(passwordEncoder.encode(clienteInputDTO
+            .getUsuario().getSenha()));
+           UsuarioEntity usuarioSalvo = this.usuarioRepository.save(usuario);
+
+           System.out.println("salvou usuario");
+           ClienteEntity cliente = clienteEntity;
+           cliente.setUsuario(usuarioSalvo);
+           cliente.setEndereco(clienteInputDTO.getEndereco());
+
+           ClienteEntity clienteSalvo = this.clienteRepository.save(cliente);
+
+           return new ClienteOutputDTO().builder()
+                   .id(clienteSalvo.getId())
+                   .usuario(new UsuarioOutputDTO().builder()
+                           .id(usuarioSalvo.getId())
+                           .email(usuarioSalvo.getEmail())
+                           .isAdm(usuarioSalvo.isAdm())
+                           .login(usuarioSalvo.getLogin())
+                           .nome(usuarioSalvo.getNome())
+                           .build())
+                   .endereco(clienteSalvo.getEndereco()).build();
+       }
+
+       return new ClienteOutputDTO().builder()
+                .id(clienteEntity.getId())
+                .usuario(new UsuarioOutputDTO().builder()
+                        .id(clienteEntity.getUsuario().getId())
+                        .email(clienteEntity.getUsuario().getEmail())
+                        .isAdm(clienteEntity.getUsuario().isAdm())
+                        .login(clienteEntity.getUsuario().getLogin())
+                        .nome(clienteEntity.getUsuario().getNome())
+                        .build())
+                .endereco(clienteEntity.getEndereco()).build();
+
+    }
 
 
 }

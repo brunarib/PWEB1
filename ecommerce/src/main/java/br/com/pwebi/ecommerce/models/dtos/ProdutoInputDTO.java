@@ -4,6 +4,8 @@ package br.com.pwebi.ecommerce.models.dtos;
 import br.com.pwebi.ecommerce.models.entities.CategoriaEntity;
 import lombok.*;
 
+import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -11,7 +13,7 @@ import lombok.*;
 @Builder
 public class ProdutoInputDTO {
 
-    private CategoriaDTO categoria;
+    private List<CategoriaDTO> categorias;
     private  String descricaoProduto;
     private  float preco;
     private int quantidadeEstoque;

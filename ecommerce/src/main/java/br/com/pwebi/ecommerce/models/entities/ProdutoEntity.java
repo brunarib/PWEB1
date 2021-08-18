@@ -1,20 +1,19 @@
 package br.com.pwebi.ecommerce.models.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import br.com.pwebi.ecommerce.models.dtos.CategoriaDTO;
+import lombok.*;
 
 import javax.persistence.*;
-import java.io.Serializable;
+
 import java.util.List;
-import java.util.Set;
+
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder(toBuilder = true)
 @Table(name = "produto")
 public class ProdutoEntity   {
 
@@ -39,11 +38,11 @@ public class ProdutoEntity   {
     @Column(name = "foto",length = 429496729)
     private byte[] foto;
 
-    /*@OneToMany(fetch = FetchType.LAZY, mappedBy = "produto")
-    private Set<ProdutoCategoriaEntity> produtoCategoriaEntities;
-*/
 
-    @ManyToMany
+
+    @ManyToMany(cascade ={CascadeType.DETACH,
+            CascadeType.REFRESH})
+
     @JoinTable(name="produto_categoria", joinColumns=
             {@JoinColumn(name="produto_id")}, inverseJoinColumns=
             {@JoinColumn(name="categoria_id")})

@@ -1,19 +1,16 @@
 package br.com.pwebi.ecommerce.models.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
-import java.util.List;
-import java.util.Set;
+
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder(toBuilder = true)
 @Table(name = "categoria")
 public class CategoriaEntity {
 
@@ -25,7 +22,5 @@ public class CategoriaEntity {
 
     @Column(name = "descricao", unique = true, nullable = false)
     protected  String descricao;
-//
-//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "categoria")
-//    private Set<ProdutoCategoriaEntity> produtoCategoriaEntities;
+
 }

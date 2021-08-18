@@ -2,6 +2,7 @@ package br.com.pwebi.ecommerce.controllers;
 
 import br.com.pwebi.ecommerce.exception.ValidationException;
 import br.com.pwebi.ecommerce.models.dtos.ClienteInputDTO;
+import br.com.pwebi.ecommerce.models.dtos.ClienteInputUpdateDTO;
 import br.com.pwebi.ecommerce.models.dtos.ClienteOutputDTO;
 import br.com.pwebi.ecommerce.models.entities.UsuarioEntity;
 import br.com.pwebi.ecommerce.models.repositories.UsuarioRepository;
@@ -39,22 +40,6 @@ public class UsuarioClienteController {
         return new ResponseEntity(clienteOutputDTO,HttpStatus.CREATED);
     }
 
-  /*  @GetMapping("/validarSenha")
-    public ResponseEntity<Boolean> validarSenha(@RequestParam String login,
-                                                @RequestParam String senha) {
-
-        Optional<UsuarioEntity> optUsuario = repository.findByLogin(login);
-        if (!optUsuario.isPresent()) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(false);
-        }
-
-        UsuarioEntity usuario = optUsuario.get();
-        boolean valid = encoder.matches(senha, usuario.getSenha());
-
-        HttpStatus status = (valid) ? HttpStatus.OK : HttpStatus.UNAUTHORIZED;
-        return ResponseEntity.status(status).body(valid);
-    }*/
-
     @GetMapping("/listarTodos")
     @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<List<UsuarioEntity>> listarTodos() {
@@ -66,5 +51,22 @@ public class UsuarioClienteController {
     public ResponseEntity<ClienteOutputDTO> getCliente(@RequestHeader (
             "Authorization") String token) throws ValidationException{
         return new ResponseEntity(usuarioService.findByToken(token), HttpStatus.OK);
+    }
+
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping("/deletar")
+    public ResponseEntity<Void> delete(@Valid @RequestParam("clienteId") long clienteId) {
+        usuarioService.delete(clienteId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @PutMapping("/editar")
+    public ResponseEntity<ClienteOutputDTO> update(@Valid @RequestBody ClienteInputUpdateDTO dto) {
+        ClienteOutputDTO clienteOutputDTO = usuarioService.update(dto);
+
+        return new ResponseEntity<>(clienteOutputDTO,HttpStatus.OK);
     }
 }

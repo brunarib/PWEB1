@@ -1,7 +1,6 @@
 package br.com.pwebi.ecommerce.controllers;
 
-import br.com.pwebi.ecommerce.models.dtos.ProdutoInputDTO;
-import br.com.pwebi.ecommerce.models.dtos.ProdutoOutputDTO;
+import br.com.pwebi.ecommerce.models.dtos.*;
 import br.com.pwebi.ecommerce.models.entities.ProdutoEntity;
 import br.com.pwebi.ecommerce.services.interfaces.IProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,5 +34,22 @@ public class ProdutoController {
         List<ProdutoOutputDTO>list = produtoService.listAll();
         return new ResponseEntity<>(list,
                 HttpStatus.OK);
+    }
+
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping("/deletar")
+    public ResponseEntity<Void> delete(@Valid @RequestParam("produtoId") long produtoId) {
+        produtoService.delete(produtoId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @PutMapping("/editar")
+    public ResponseEntity<ProdutoOutputDTO> update(@Valid @RequestBody ProdutoInputUpdateDTO dto) {
+        ProdutoOutputDTO produtoOutputDTO = produtoService.update(dto);
+
+        return new ResponseEntity<>(produtoOutputDTO,HttpStatus.OK);
     }
 }
