@@ -50,22 +50,22 @@ function userData() {
     let token = localStorage.getItem('TOKEN-SESSION');
     let data = dataGet(urlServer, token);
     let response = JSON.parse(data);
+
     console.log(response.usuario.adm);
     if(response.usuario.adm){
         conta.href="page-admin.html";
     }
 
-    if(document.getElementById('login-client')){
-        let loginUser = document.getElementById('login-client');
-        let nomeUser = document.getElementById('nome-client');
-        let emailUser = document.getElementById('email-client');
-        let enderecoUser = document.getElementById('endereco-client');
-        
-        loginUser.innerHTML = "Login: " +response.usuario.login;
-        nomeUser.innerHTML =  "Nome: " + response.usuario.nome;
-        emailUser.innerHTML= "Email: " + response.usuario.email;
-        enderecoUser.innerHTML= "Endereço: " + response.endereco; 
-    }
+    let loginUser = document.getElementById('login-config');
+    let nomeUser = document.getElementById('nome-config');
+    let emailUser = document.getElementById('email-config');
+    let enderecoUser = document.getElementById('endereco-config');
+    
+    loginUser.innerHTML = "Login: " +response.usuario.login;
+    nomeUser.innerHTML =  "Nome: " + response.usuario.nome;
+    emailUser.innerHTML= "Email: " + response.usuario.email;
+    enderecoUser.innerHTML= "Endereço: " + response.endereco; 
+    
 
 }
 function registerPost(url, body){
