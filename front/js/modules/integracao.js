@@ -6,6 +6,7 @@ let userConta = document.getElementById("conta-user");
 let clienteId = '';
 
 
+ //objeto global de cliente
 
 
 var cliente = {
@@ -19,6 +20,8 @@ var cliente = {
     "endereco": null,
     "id": null
   };
+
+  //meotodo de update
 
     function changeData() {
 
@@ -113,7 +116,9 @@ function userData() {
     nomeUser.innerHTML =  "Nome: " + response.usuario.nome;
     emailUser.innerHTML= "Email: " + response.usuario.email;
     enderecoUser.innerHTML= "Endereço: " + response.endereco; 
-
+    
+    
+ // preenche o objeto global de cliente
     cliente.endereco = response.endereco;
     cliente.id= response.id;
     cliente.usuario.id=response.usuario.id;
@@ -208,6 +213,7 @@ function singOut(){
 }
 
 
+ //meotodo de delete
 
 function deleteCliente(){
     var data = clienteId;
