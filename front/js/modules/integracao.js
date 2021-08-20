@@ -3,32 +3,80 @@ let formsView = document.querySelector(".forms");
 let logoutButton = document.getElementById('logout');
 let conta = document.getElementById("minha-conta");
 let userConta = document.getElementById("conta-user");
+let clienteId = '';
 
-if(document.getElementById("#change-name")){
-    let changeName = document.getElementById("#change-name").value;
-    let changeEmail = document.getElementById("#change-email").value;
-    let changeAddress = document.getElementById("#change-address").value;
-    let changeSend = document.getElementById("#change-send")
-    let configName = document.getElementById("nome-config");
-    let configEmail = document.getElementById("#change-address");
-    let configAddress = document.getElementById("#change-address");
+
+
+
+var cliente = {
+    "usuario": {
+      "id": null,
+      "nome": null,
+      "login": null,
+      "email": null,
+      "senha": null
+    },
+    "endereco": null,
+    "id": null
+  };
 
     function changeData() {
-        event.preventDefault();
+
+        let configName = document.getElementById("nome-config");
+        let configEmail = document.getElementById("email-config");
+        let configAddress = document.getElementById("endereco-config");
+
+        let changeName = document.getElementById("change-name").value;
+        let changeEmail = document.getElementById("change-email").value;
+        let changeAddress = document.getElementById("change-address").value;
+    
+    
         configName.innerHTML = "Nome: " + changeName;
         configEmail.innerHTML = "Email: " + changeEmail;
         configAddress.innerHTML = "Endereço: " + changeAddress;
+
+        var data = JSON.stringify({
+            "usuario": {
+              "id": cliente.usuario.id,
+              "nome": changeName,
+              "email": changeEmail
+            },
+            "endereco": changeAddress,
+            "id": cliente.id
+          });
+
+          let token = localStorage.getItem('TOKEN-SESSION');
+    const url = `http://localhost:8181/clientes/editar`;
+    var data = JSON.stringify({
+        "usuario": {
+          "id": cliente.usuario.id,
+          "nome": changeName,
+          "email": changeEmail
+        },
+        "endereco": changeAddress,
+        "id": cliente.id
+      });
+
+    console.log("change"+data);
+    let request = new XMLHttpRequest();
+    request.open("PUT", url, false);
+    request.setRequestHeader("Authorization", "Bearer "+token);
+    request.setRequestHeader("Content-Type", "application/json");
+    request.send(data);
+
+    console.log("change"+data);
+       
     }
 
-    changeSend.addEventListener('submit', changeData);
-
-}
+   
+    
+    
 
 
 
 if (localStorage.getItem('TOKEN-SESSION')){
    signIn();
-   if (window.location.href == "http://localhost:3000/pagina-minha-conta.html" || window.location.href == "http://localhost:3000/index.html" ){
+   if (window.location.href == "http://localhost:3000/pagina-minha-conta.html" || window.location.href == "http://localhost:3000/pagina-minha-conta-config.html" || window.location.href == "http://localhost:3000/index.html" ){
     userData();
    }
    
@@ -65,6 +113,15 @@ function userData() {
     nomeUser.innerHTML =  "Nome: " + response.usuario.nome;
     emailUser.innerHTML= "Email: " + response.usuario.email;
     enderecoUser.innerHTML= "Endereço: " + response.endereco; 
+
+    cliente.endereco = response.endereco;
+    cliente.id= response.id;
+    cliente.usuario.id=response.usuario.id;
+    cliente.usuario.email=response.usuario.email;
+    cliente.usuario.nome=response.usuario.nome;
+    cliente.usuario.login=response.usuario.login;
+    console.log(cliente);
+
     
 
 }
@@ -148,5 +205,26 @@ function singOut(){
         formsView.classList.add('form-enable');
     }
     window.open("http://localhost:3000/index.html","_self")
+}
+
+
+
+function deleteCliente(){
+    var data = clienteId;
+
+    let token = localStorage.getItem('TOKEN-SESSION');
+    const params = new URLSearchParams({ clienteId: cliente.id});
+    const query = params.toString(); // Output: foo=1&bar=2
+    const url = `http://localhost:8181/clientes/deletar?${query}`;
+
+
+    console.log("id:"+clienteId);
+    console.log(token);
+    let request = new XMLHttpRequest();
+    request.open("DELETE", url, false);
+    request.setRequestHeader("Authorization", "Bearer "+token);
+    request.send();
+    console.log(request.responseText);
+    
 }
 

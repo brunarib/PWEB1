@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
 </head>
 <body>
     <header class="container">
@@ -13,7 +14,7 @@
             <img src="/images/home.png" alt="Pagina Incial">
         </a>
         <h1>Trabalho de Prog Web 1</h1>
-        <    <div class="group-conta-carrinho">
+            <div class="group-conta-carrinho">
             <div  class="conta-user" id="conta-user">
                 <p>olá,&nbsp;</p>
                 <p id="user" ></p>
@@ -42,7 +43,7 @@
             </div>
         </section>
         <section class="add-container container">
-            <form action="">
+            <form onsubmit="cadastrarCategoria()">
                 <div class="input-item">
                     <label for="category">Categoria</label>
                     <input type="text" name="category" id="category">
@@ -92,7 +93,7 @@
             </div>
             <div class="result-item">
                 <div class="item__content">
-                    <div class="content__description">
+                    <div class="content__description" >
                         <small>categoria</small>
                         <small>id:545465</small>
                         <small>Quantidade de produtos dentro</small>
@@ -105,7 +106,30 @@
             </div>
         </section>
 
+        <section>
+            <div>
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">ID</th>
+                        <th scope="col">descrição</th>
+                      </tr>
+                    </thead>
+                    <tbody class="tableCategoria">
+                      <tr class="rowItem" style="display:none;">
+                        <td class="rowNumber" >Jacob</td>
+                        <td class="categoriaId">Jacob</td>
+                        <td class="descricao"> Jacob</td> 
+                      </tr>
+                      
+                    </tbody>
+                  </table>
+            </div>
+        </section>
     </div>
     <script src="js/main.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
 </body>
 </html>
