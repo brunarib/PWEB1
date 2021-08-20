@@ -164,10 +164,7 @@ public class UsuarioServiceImpl implements IUsuarioService {
                usuario.setAdm(false);
            }
            usuario.setEmail(clienteInputDTO.getUsuario().getEmail());
-           usuario.setLogin(clienteInputDTO.getUsuario().getLogin());
            usuario.setNome(clienteInputDTO.getUsuario().getNome());
-           usuario.setSenha(passwordEncoder.encode(clienteInputDTO
-            .getUsuario().getSenha()));
            UsuarioEntity usuarioSalvo = this.usuarioRepository.save(usuario);
 
            System.out.println("salvou usuario");

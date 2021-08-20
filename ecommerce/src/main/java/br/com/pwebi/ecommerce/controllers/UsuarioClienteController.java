@@ -50,12 +50,15 @@ public class UsuarioClienteController {
     @GetMapping("/getCliente")
     public ResponseEntity<ClienteOutputDTO> getCliente(@RequestHeader (
             "Authorization") String token) throws ValidationException{
-        return new ResponseEntity(usuarioService.findByToken(token), HttpStatus.OK);
+
+        ClienteOutputDTO dto = usuarioService.findByToken(token);
+        return new ResponseEntity(dto, HttpStatus.OK);
     }
 
 
-    @CrossOrigin(origins = "http://localhost:3000")
+
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @CrossOrigin(origins = "http://localhost:3000")
     @DeleteMapping("/deletar")
     public ResponseEntity<Void> delete(@Valid @RequestParam("clienteId") long clienteId) {
         usuarioService.delete(clienteId);
