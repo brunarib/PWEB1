@@ -53,22 +53,22 @@ function listarCategorias() {
     xhr.open("GET", "http://localhost:8181/categorias", true);
     xhr.onload = function () {
         var jsonResponse = JSON.parse(xhr.responseText);
-        //console.log(jsonResponse);
+        console.log(jsonResponse);
         let pai = document.querySelector(".tableCategoria");
-        for(var i=0; i <=jsonResponse.length; i++){
-            
+        let tr = document.querySelector(".rowItem");
 
-            let tr = document.querySelector(".rowItem");
-            console.log(tr);
+        jsonResponse.forEach((element, index) => {
             let clone = tr.cloneNode(true);
-           //cd console.log(clone);
-            let tdNumber = clone.querySelector(".rowNumber");
-          /*   let tdId = clone.querySelector(".categoriaId");
-            let tdDescription = clone.querySelector(".descricao"); */
-           /*  tdNumber.innerHTML = jsonResponse[i].descricao; */
-            clone.appendChild(pai);
-
-        }
+            let rowNumber = clone.querySelector('.rowNumber');
+            let categoriaId = clone.querySelector('.categoriaId');
+            let descricao = clone.querySelector('.descricao');
+            rowNumber.innerHTML = index;
+            categoriaId.innerHTML = element.categoriaId;
+            descricao.innerHTML = element.descricao;
+            clone.appendChild(delButton());
+            pai.appendChild(clone);
+        });
+            
        
 
     };
@@ -84,3 +84,19 @@ listarCategorias();
 
 
 
+const delButton = () => {
+
+    const del = document.createElement('button');
+    del.classList.add('button-remove');
+    del.innerText = 'X';
+    del.addEventListener('click', delLi);
+
+    return del;
+}
+
+const delLi = (event) => {
+    const del = event.target;
+    const line = del.parentElement;
+    line.remove();
+    return del;
+}
