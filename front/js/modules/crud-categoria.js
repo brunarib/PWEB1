@@ -20,6 +20,34 @@ if (window.location.href == "http://localhost:3000/page-categorys.html") {
 }
 
 
+function changeCategory(id, description) {
+    
+    var data = JSON.stringify({
+        "id": Number(id),
+        "descricao": description
+    });
+    console.log(data);
+
+    let token = localStorage.getItem('TOKEN-SESSION');
+    const url = `http://localhost:8181/categorias/editar`;
+
+    let request = new XMLHttpRequest();
+    request.open("PUT", url, false);
+    request.setRequestHeader("Authorization", "Bearer "+token);
+    request.setRequestHeader("Content-Type", "application/json");
+    request.send(data);
+   /*  window.location.reload(true);  */
+
+}
+/* 
+if (localStorage.getItem('TOKEN-SESSION')){
+   signIn();
+   if (window.location.href == "http://localhost:3000/pagina-minha-conta.html" || window.location.href == "http://localhost:3000/pagina-minha-conta-config.html" || window.location.href == "http://localhost:3000/index.html" ){
+    userData();
+   }
+   
+}
+ */
 function cadastrarCategoria() {
 
     event.preventDefault();
@@ -59,6 +87,7 @@ function listarCategorias() {
 
         jsonResponse.forEach((element, index) => {
             let clone = tr.cloneNode(true);
+            clone.style.display = "table-row";
             let rowNumber = clone.querySelector('.rowNumber');
             let categoriaId = clone.querySelector('.categoriaId');
             let descricao = clone.querySelector('.descricao');
@@ -66,11 +95,10 @@ function listarCategorias() {
             categoriaId.innerHTML = element.categoriaId;
             descricao.innerHTML = element.descricao;
             clone.appendChild(delButton());
+            clone.appendChild(changeButton());
             pai.appendChild(clone);
-        });
-            
-       
 
+        });
     };
 
     xhr.send(null);
@@ -81,14 +109,27 @@ function listarCategorias() {
 listarCategorias();
 
 
+function deleteCategory(id){
+    let token = localStorage.getItem('TOKEN-SESSION');
+    const params = new URLSearchParams({ categoriaId: id});
+    const query = params.toString(); // Output: foo=1&bar=2
+    const url = `http://localhost:8181/categorias/deletar?${query}`;
 
+
+    console.log("id:"+clienteId);
+    console.log(token);
+    let request = new XMLHttpRequest();
+    request.open("DELETE", url, false);
+    request.setRequestHeader("Authorization", "Bearer "+token);
+    request.send();
+    console.log(request.responseText);
+    
+}
 
 
 const delButton = () => {
-
-    const del = document.createElement('button');
-    del.classList.add('button-remove');
-    del.innerText = 'X';
+    const del = document.createElement('a');
+    del.innerText = 'excluir';
     del.addEventListener('click', delLi);
 
     return del;
@@ -97,6 +138,26 @@ const delButton = () => {
 const delLi = (event) => {
     const del = event.target;
     const line = del.parentElement;
+    deleteCategory(del.parentElement.querySelector('.categoriaId').innerHTML)
+    console.log(del.parentElement.querySelector('.categoriaId').innerHTML);
     line.remove();
     return del;
+}
+
+const changeButton = () => {
+    const change = document.createElement('button');
+    change.innerText = 'Editar';
+    change.addEventListener('click', changeLi);
+
+    return change;
+}
+
+const changeLi = (event) => {
+    const change = event.target;
+    let inputValue = change.parentElement.querySelector('.change-description').value;
+    let id = change.parentElement.querySelector('.categoriaId').innerHTML;
+    console.log(inputValue);
+    console.log(id);
+    changeCategory(id,inputValue);
+    return change;
 }
