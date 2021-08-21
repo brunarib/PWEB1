@@ -1,8 +1,3 @@
-var categoria = {
-    "id": null,
-    "descricao": null
-};
-
 
 var categorias = [];
 
@@ -21,9 +16,9 @@ if (window.location.href == "http://localhost:3000/page-categorys.html") {
 
 
 function changeCategory(id, description) {
-    
+    let categoriaId = Number(id);
     var data = JSON.stringify({
-        "id": Number(id),
+        "categoriaId": categoriaId,
         "descricao": description
     });
     console.log(data);
@@ -36,7 +31,7 @@ function changeCategory(id, description) {
     request.setRequestHeader("Authorization", "Bearer "+token);
     request.setRequestHeader("Content-Type", "application/json");
     request.send(data);
-   /*  window.location.reload(true);  */
+    window.location.reload(true); 
 
 }
 /* 
