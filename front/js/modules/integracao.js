@@ -5,10 +5,7 @@ let conta = document.getElementById("minha-conta");
 let userConta = document.getElementById("conta-user");
 let clienteId = '';
 
-
  //objeto global de cliente
-
-
 var cliente = {
     "usuario": {
       "id": null,
@@ -23,32 +20,31 @@ var cliente = {
 
   //meotodo de update
 
-    function changeData() {
+function changeData() {
+    let configName = document.getElementById("nome-config");
+    let configEmail = document.getElementById("email-config");
+    let configAddress = document.getElementById("endereco-config");
 
-        let configName = document.getElementById("nome-config");
-        let configEmail = document.getElementById("email-config");
-        let configAddress = document.getElementById("endereco-config");
+    let changeName = document.getElementById("change-name").value;
+    let changeEmail = document.getElementById("change-email").value;
+    let changeAddress = document.getElementById("change-address").value;
 
-        let changeName = document.getElementById("change-name").value;
-        let changeEmail = document.getElementById("change-email").value;
-        let changeAddress = document.getElementById("change-address").value;
-    
-    
-        configName.innerHTML = "Nome: " + changeName;
-        configEmail.innerHTML = "Email: " + changeEmail;
-        configAddress.innerHTML = "Endereço: " + changeAddress;
 
-        var data = JSON.stringify({
-            "usuario": {
-              "id": cliente.usuario.id,
-              "nome": changeName,
-              "email": changeEmail
-            },
-            "endereco": changeAddress,
-            "id": cliente.id
-          });
+    configName.innerHTML = "Nome: " + changeName;
+    configEmail.innerHTML = "Email: " + changeEmail;
+    configAddress.innerHTML = "Endereço: " + changeAddress;
 
-          let token = localStorage.getItem('TOKEN-SESSION');
+    var data = JSON.stringify({
+        "usuario": {
+            "id": cliente.usuario.id,
+            "nome": changeName,
+            "email": changeEmail
+        },
+        "endereco": changeAddress,
+        "id": cliente.id
+        });
+
+        let token = localStorage.getItem('TOKEN-SESSION');
     const url = `http://localhost:8181/clientes/editar`;
     var data = JSON.stringify({
         "usuario": {
@@ -68,14 +64,9 @@ var cliente = {
     request.send(data);
 
     console.log("change"+data);
+    window.location.reload(true); 
        
-    }
-
-   
-    
-    
-
-
+}
 
 if (localStorage.getItem('TOKEN-SESSION')){
    signIn();
