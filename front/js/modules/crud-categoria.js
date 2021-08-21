@@ -69,7 +69,6 @@ function cadastrarCategoria() {
 
 
 function listarCategorias() {
-
     var xhr = new XMLHttpRequest();
 
     xhr.overrideMimeType("application/json");
@@ -80,20 +79,32 @@ function listarCategorias() {
         let pai = document.querySelector(".tableCategoria");
         let tr = document.querySelector(".rowItem");
 
-        jsonResponse.forEach((element, index) => {
-            let clone = tr.cloneNode(true);
-            clone.style.display = "table-row";
-            let rowNumber = clone.querySelector('.rowNumber');
-            let categoriaId = clone.querySelector('.categoriaId');
-            let descricao = clone.querySelector('.descricao');
-            rowNumber.innerHTML = index;
-            categoriaId.innerHTML = element.categoriaId;
-            descricao.innerHTML = element.descricao;
-            clone.appendChild(delButton());
-            clone.appendChild(changeButton());
-            pai.appendChild(clone);
+        if(document.querySelector('.category-list')){
+            jsonResponse.forEach((element, index) => {
+                let clone = tr.cloneNode(true);
+                clone.style.display = "table-row";
+                let rowNumber = clone.querySelector('.rowNumber');
+                let categoriaId = clone.querySelector('.categoriaId');
+                let descricao = clone.querySelector('.descricao');
+                rowNumber.innerHTML = index;
+                categoriaId.innerHTML = element.categoriaId;
+                descricao.innerHTML = element.descricao;
+                clone.appendChild(delButton());
+                clone.appendChild(changeButton());
+                pai.appendChild(clone);
+            });
+        }
 
-        });
+        if(document.querySelector('.product-list')){
+            let categorySelect = document.querySelector('#category-select');
+            
+            jsonResponse.forEach((element, index) => {
+                let option = document.createElement('option');
+                option.value ="id: " + element.categoriaId + " " + element.descricao;
+                option.innerHTML ="id: " + element.categoriaId + " " + element.descricao;
+                categorySelect.appendChild(option);
+            });
+        }
     };
 
     xhr.send(null);
@@ -102,7 +113,6 @@ function listarCategorias() {
 }
 
 listarCategorias();
-
 
 function deleteCategory(id){
     let token = localStorage.getItem('TOKEN-SESSION');
