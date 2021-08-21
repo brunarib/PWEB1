@@ -43,10 +43,14 @@
         </section>
         <section class="add-container container">
             <form onsubmit="createProduct">
-                <div class="input-item">
-                    <select name="categoria" id="cateogiras">
-                        <option value="x">X</option>
-                    </select>
+                <div class="input-item" id="dados-categoria">
+                    <div class="categoriaItem">
+                        <p class="id-categoria-produto">0</p>
+                        <select name="categoria" id="categoria-produto">
+                            <option class="nome-categoria-produto">X</option>
+                        </select>
+                    </div>
+                    
                 </div>
                 <div class="input-item">
                     <label for="description">Descrição</label>
