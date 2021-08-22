@@ -4,9 +4,9 @@ function cadastrarProduto() {
     let optionCategory = document.querySelectorAll('#category-select option');
     let selectedValue;
     let categoryDescription;
-    let productDescription = document.querySelector('#description').value;
-    let productValue = document.querySelector('#value').value;
-    let productQtd = document.querySelector('#qtd').value;
+    let productDescription = document.getElementById('produto-description').value;
+    let productValue = document.getElementById('valor-produto').value;
+    let productQtd = document.getElementById('quantidade-produto').value;
     
     optionCategory.forEach(element => {
         if(element.selected){
