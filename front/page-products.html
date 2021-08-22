@@ -42,16 +42,12 @@
             </div>
         </section>
         <section class="add-container container">
-            <form action="">
+            <form onsubmit="cadastrarProduto()">
                 <div class="input-item">
                     <label for="category-select">Categoria</label>
                     <select name="" id="category-select">
                         <option value="Selecione a categoria" selected disabled>Selecione a categoria</option>
                     </select>
-                </div>
-                <div class="input-item">
-                    <label for="name">Nome</label>
-                    <input type="text" name="name" id="name">
                 </div>
                 <div class="input-item">
                     <label for="description">descrição</label>
@@ -60,6 +56,10 @@
                 <div class="input-item">
                     <label for="value">Valor</label>
                     <input type="text" name="value" id="value">
+                </div>
+                <div class="input-item">
+                    <label for="qtd">Quantidade</label>
+                    <input type="text" name="qtd" id="qtd">
                 </div>
                 <input class="button-add" type="submit" value="+">
             </form>

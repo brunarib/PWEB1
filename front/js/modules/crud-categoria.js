@@ -100,8 +100,8 @@ function listarCategorias() {
             
             jsonResponse.forEach((element, index) => {
                 let option = document.createElement('option');
-                option.value ="id: " + element.categoriaId + " " + element.descricao;
-                option.innerHTML ="id: " + element.categoriaId + " " + element.descricao;
+                option.value = element.categoriaId;
+                option.innerHTML = element.descricao;
                 categorySelect.appendChild(option);
             });
         }
