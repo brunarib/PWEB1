@@ -51,17 +51,17 @@ function listarPrdutos(){
     xhr.onload = function(){
         var jsonResponse = JSON.parse(xhr.responseText);
         console.log(jsonResponse);
-        let pai = document.querySelector(".item__content");
-        let tr = document.querySelector(".content__description");
+        let pai = document.querySelector(".item-content");
+        let tr = document.querySelector(".content-description");
         jsonResponse.forEach((element, index) =>{
             let clone = tr.cloneNode(true);
-            let position = clone.getElementById("position");
-            let idCategoria = clone.getElementById("id-categoria");
-            let categoriaNome =clone.getElementById("categoria-des");
-            let idProduto = clone.getElementById("id-produto");
-            let nomeProduto = clone.getElementById("nome-pro");
-            let quantProduto = clone.getElementById("valor-pro");
-            let precoProduto = clone.getElementById("quat-pro");
+            let position = clone.querySelector("position");
+            let idCategoria = clone.querySelector("id-categoria");
+            let categoriaNome =clone.querySelector("categoria-des");
+            let idProduto = clone.querySelector("id-produto");
+            let nomeProduto = clone.querySelector("nome-pro");
+            let quantProduto = clone.querySelector("valor-pro");
+            let precoProduto = clone.querySelector("quat-pro");
             position.innerHTML = index;
             idCategoria.innerHTML = element.categoria.categoriaId;
             categoriaNome.innerHTML = element.categoria.descricao;
@@ -69,8 +69,8 @@ function listarPrdutos(){
             nomeProduto.innerHTML = element.descricaoProduto;
             quantProduto.innerHTML = element.quantidadeEstoque;
             precoProduto.innerHTML = element.preco;
-            clone.appendChild(changeButton());
-            clone.appendChild(delButton);
+            clone.appendChild(changeButtonProduto());
+            clone.appendChild(delButtonProduto);
             pai.appendChild(clone);
             
         });
@@ -81,9 +81,56 @@ function listarPrdutos(){
 }
 listarPrdutos();
 
+function deletarProduto(id){
+    let token = localStorage.getItem("TOKEN-SESSION");
+    const params = new URLSearchParams({produtoId : id});
+    const query = params.toString(); 
+    const url = `http://localhost:8181/produtos/deletar?${query}`;
+
+    console.log("id:" + produtoId);
+    console.log(token);
+    let request = new XMLHttpRequest();
+    request.open("DELETE", url, false);
+    request.setRequestHeader("Authorization", "Bearer "+token);
+    request.send();
+    console.log(request.responseText);
+}
 
 
-        
+const delButtonProduto = () => {
+    const del = document.createElement('a');
+    del.innerText = 'excluir';
+    del.addEventListener('click', delLiProduto);
+
+    return del;
+}
+
+const delLiProduto = (event) => {
+    const del = event.target;
+    const line = del.parentElement;
+    deletarProduto(del.parentElement.querySelector('.produtoId').innerHTML)
+    console.log(del.parentElement.querySelector('.produtoId').innerHTML);
+    line.remove();
+    return del;
+}
+
+const changeButtonProduto = () => {
+    const change = document.createElement('button');
+    change.innerText = 'Editar';
+    change.addEventListener('click', changeLiProduto);
+
+    return change;
+}
+
+const changeLiProduto = (event) => {
+    const change = event.target;
+    let inputValue = change.parentElement.querySelector('.change-description').value;
+    let id = change.parentElement.querySelector('.categoriaId').innerHTML;
+    console.log(inputValue);
+    console.log(id);
+    changeCategory(id,inputValue);
+    return change;
+}       
         
 
         
