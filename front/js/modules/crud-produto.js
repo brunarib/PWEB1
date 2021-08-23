@@ -44,6 +44,28 @@ function cadastrarProduto() {
         alert("Produto Cadastrado!");
     }
 }
+function mudarProduto(id, nome, preco, quantidade){
+    let produtoId = Number(id);
+    var data = JSON.stringify({
+        "descricaoProduto": nome,
+        "preco": preco,
+        "produtoId": id,
+        "quantidadeEstoque": quantidade
+
+    })
+    console.log(data);
+
+    let token = localStorage.getItem('TOKEN-SESSION');
+    const url = `http://localhost:8181/produtos/editar`;
+
+    let request = new XMLHttpRequest();
+    request.open("PUT", url, false);
+    request.setRequestHeader("Authorization", "Bearer "+token);
+    request.setRequestHeader("Content-Type", "application/json");
+    request.send(data);
+    window.location.reload(true);
+}
+
 function listarPrdutos(){
     var xhr = new XMLHttpRequest();
     xhr.overrideMimeType("application/json");
@@ -124,11 +146,15 @@ const changeButtonProduto = () => {
 
 const changeLiProduto = (event) => {
     const change = event.target;
-    let inputValue = change.parentElement.querySelector('.change-description').value;
-    let id = change.parentElement.querySelector('.categoriaId').innerHTML;
-    console.log(inputValue);
+    let inputValueNome = change.parentElement.querySelector('.change-description-nome').value;
+    let inputValuePreco = change.parentElement.querySelector('.change-description-valor').value;
+    let inputValueQuantidade = change.parentElement.querySelector('.change-description-quantidade').value;
+    let id = change.parentElement.querySelector('.produtoId').innerHTML;
+    console.log(inputValueNome);
+    console.log(inputValuePreco);
+    console.log(inputValueQuantidade);
     console.log(id);
-    changeCategory(id,inputValue);
+    changeCategory(id,inputValue,inputValuePreco,inputValueQuantidade);
     return change;
 }       
         
