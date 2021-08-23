@@ -30,7 +30,7 @@ function cadastrarProduto() {
           "preco": productValue,
           "quantidadeEstoque": productQtd
     });
-    console.log(bodyServer)
+    console.log(bodyServer);
 
 
     let request = new XMLHttpRequest();
@@ -44,3 +44,46 @@ function cadastrarProduto() {
         alert("Produto Cadastrado!");
     }
 }
+function listarPrdutos(){
+    var xhr = new XMLHttpRequest();
+    xhr.overrideMimeType("application/json");
+    xhr.open("GET", "http://localhost:8181/produtos");
+    xhr.onload = function(){
+        var jsonResponse = JSON.parse(xhr.responseText);
+        console.log(jsonResponse);
+        let pai = document.querySelector(".item__content");
+        let tr = document.querySelector(".content__description");
+        jsonResponse.forEach((element, index) =>{
+            let clone = tr.cloneNode(true);
+            let position = clone.getElementById("position");
+            let idCategoria = clone.getElementById("id-categoria");
+            let categoriaNome =clone.getElementById("categoria-des");
+            let idProduto = clone.getElementById("id-produto");
+            let nomeProduto = clone.getElementById("nome-pro");
+            let quantProduto = clone.getElementById("valor-pro");
+            let precoProduto = clone.getElementById("quat-pro");
+            position.innerHTML = index;
+            idCategoria.innerHTML = element.categoria.categoriaId;
+            categoriaNome.innerHTML = element.categoria.descricao;
+            idProduto.innerHTML = element.produtoId;
+            nomeProduto.innerHTML = element.descricaoProduto;
+            quantProduto.innerHTML = element.quantidadeEstoque;
+            precoProduto.innerHTML = element.preco;
+            clone.appendChild(changeButton());
+            clone.appendChild(delButton);
+            pai.appendChild(clone);
+            
+        });
+    }
+    xhr.send(null);
+    console.log(jsonData);    
+        
+}
+listarPrdutos();
+
+
+
+        
+        
+
+        
