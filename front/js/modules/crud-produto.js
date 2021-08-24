@@ -46,12 +46,13 @@ function cadastrarProduto() {
 }
 function mudarProduto(id, nome, preco, quantidade){
     let produtoId = Number(id);
+    let produtoP = Number(preco);
+    let produtoQ = Number(quantidade);
     var data = JSON.stringify({
         "descricaoProduto": nome,
-        "preco": preco,
-        "produtoId": id,
-        "quantidadeEstoque": quantidade
-
+        "preco": produtoP,
+        "produtoId": produtoId,
+        "quantidadeEstoque": produtoQ
     })
     console.log(data);
 
@@ -69,30 +70,31 @@ function mudarProduto(id, nome, preco, quantidade){
 function listarPrdutos(){
     var xhr = new XMLHttpRequest();
     xhr.overrideMimeType("application/json");
-    xhr.open("GET", "http://localhost:8181/produtos");
+    xhr.open("GET", "http://localhost:8181/produtos", true);
     xhr.onload = function(){
         var jsonResponse = JSON.parse(xhr.responseText);
         console.log(jsonResponse);
-        let pai = document.querySelector(".item-content");
-        let tr = document.querySelector(".content-description");
+        let pai = document.querySelector(".tableProduto");
+        let tr = document.querySelector(".rowItemProduto");
         jsonResponse.forEach((element, index) =>{
             let clone = tr.cloneNode(true);
-            let position = clone.querySelector("position");
-            let idCategoria = clone.querySelector("id-categoria");
-            let categoriaNome =clone.querySelector("categoria-des");
-            let idProduto = clone.querySelector("id-produto");
-            let nomeProduto = clone.querySelector("nome-pro");
-            let quantProduto = clone.querySelector("valor-pro");
-            let precoProduto = clone.querySelector("quat-pro");
+            clone.style.display = "table-row";
+            let position = clone.querySelector(".rowNumberProduto");
+            let idCategoria = clone.querySelector(".categoriaId");
+            let categoriaNome =clone.querySelector(".categoriaNome");
+            let idProduto = clone.querySelector(".produtoId");
+            let nomeProduto = clone.querySelector(".produtoNome");
+            let quantProduto = clone.querySelector(".produtoQuantitade");
+            let precoProduto = clone.querySelector(".precoProduto");
             position.innerHTML = index;
-            idCategoria.innerHTML = element.categoria.categoriaId;
-            categoriaNome.innerHTML = element.categoria.descricao;
+            idCategoria.innerHTML = element.categoriaId;
+            categoriaNome.innerHTML = element.descricao;
             idProduto.innerHTML = element.produtoId;
             nomeProduto.innerHTML = element.descricaoProduto;
             quantProduto.innerHTML = element.quantidadeEstoque;
             precoProduto.innerHTML = element.preco;
             clone.appendChild(changeButtonProduto());
-            clone.appendChild(delButtonProduto);
+            //clone.appendChild(delButtonProduto);
             pai.appendChild(clone);
             
         });
@@ -146,15 +148,18 @@ const changeButtonProduto = () => {
 
 const changeLiProduto = (event) => {
     const change = event.target;
-    let inputValueNome = change.parentElement.querySelector('.change-description-nome').value;
-    let inputValuePreco = change.parentElement.querySelector('.change-description-valor').value;
-    let inputValueQuantidade = change.parentElement.querySelector('.change-description-quantidade').value;
+    let inputValueNome = change.parentElement.querySelector('.change-description-produto').value;
+    let inputValuePreco = change.parentElement.querySelector('.change-quantidade-produto').value;
+    let inputValueQuantidade = change.parentElement.querySelector('.change-preco-produto').value;
     let id = change.parentElement.querySelector('.produtoId').innerHTML;
+    let nome = document.querySelector(".produtoNome");
+    let preco = document.querySelector(".precoProduto") ;
+    let quantidade =document.querySelector(".produtoQuantitade") ;
     console.log(inputValueNome);
     console.log(inputValuePreco);
     console.log(inputValueQuantidade);
     console.log(id);
-    changeCategory(id,inputValue,inputValuePreco,inputValueQuantidade);
+    mudarProduto(id, inputValueNome,inputValuePreco,inputValueQuantidade);
     return change;
 }       
         

@@ -73,26 +73,46 @@
                 </select>
             </form>
         </section>
-        <section class="result-listing container">
-            <div class="result-item">
-                <div class="item-content">
-                    <div class="content-description">
-                        <small id="position">#</small>
-                        <small id="id-categoria">0</small>
-                        <small id="categoria-des">categoria</small>
-                        <small id="id-produto">id:545465</small>
-                        <p id="nome-pro">nome do produto</p>
-                        <input type="text" class="change-description-nome" placeholder="Digite novo nome">
-                        <p id="valor-pro">valor</p>
-                        <input type="text" class="change-description-valor" placeholder="Digite novo valor">
-                        <p id="quat-pro">quantidade em estoque</p>
-                        <input type="number" class="change-description-quantidade" placeholder="Digite nova quantidade">
-                        <div id="edit-pro">Editar produto</a>
-                        <a id="remove-pro" href="">x</a>
-                    </div>
-                </div>
-            </div>  
+        <section class="container">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">ID</th>
+                        <th scope="col">Categoria</th>
+                        <th scope="col">ID</th>
+                        <th scope="col">Produto</th>
+                        <th scope="col">Editar</th>
+                        <th scope="col">Quantidade</th>
+                        <th scope="col">Editar</th>
+                        <th scope="col">Preço</th>
+                        <th scope="col">Editar</th>
+                        <th scope="col">Excluir</th>    
+                    </tr>
+                </thead>
+                <tbody class="tableProduto">
+                    <tr class="rowItemProduto" style="display: none;">
+                        <td class="rowNumberProduto">#</td>
+                        <td class="categoriaId">0</td>
+                        <td class="categoriaNome">Eletronicos</td>
+                        <td class="produtoId">0</td>
+                        <td class="produtoNome">Mouse</td>
+                        <td class="edit">
+                            <input type="text" class="change-description-produto" placeholder="Diga o novo nome do Produto">
+                        </td>
+                        <td class="produtoQuantitade">0</td>
+                        <td class="edit">
+                            <input type="number" class="change-quantidade-produto" placeholder="Diga a nova quantidade do Produto">
+                        </td>
+                        <td class="precoProduto">0</td>
+                        <td class="edit">
+                            <input type="text" class="change-preco-produto" placeholder="Diga o novo preco do Produto">
+                        </td>   
+                    </tr>
+                </tbody>
+            </table>
         </section>
+       
 
     </div>
     <script src="js/main.js"></script>
