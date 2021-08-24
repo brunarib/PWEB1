@@ -4,10 +4,10 @@ function cadastrarProduto() {
     let optionCategory = document.querySelectorAll('#category-select option');
     let selectedValue;
     let categoryDescription;
-    let productDescription = document.getElementById('produto-description').value;
-    let productValue = document.getElementById('valor-produto').value;
-    let productQtd = document.getElementById('quantidade-produto').value;
-    
+    let productDescription = document.querySelector('#description').value;
+    let productValue = document.querySelector('#value').value;
+    let productQtd = document.querySelector('#qtd').value;
+
     optionCategory.forEach(element => {
         if(element.selected){
             console.log(element.value);
@@ -30,7 +30,7 @@ function cadastrarProduto() {
           "preco": productValue,
           "quantidadeEstoque": productQtd
     });
-    console.log(bodyServer);
+    console.log(bodyServer)
 
 
     let request = new XMLHttpRequest();
@@ -43,7 +43,7 @@ function cadastrarProduto() {
 
         alert("Produto Cadastrado!");
     }
-}
+} 
 function mudarProduto(id, nome, preco, quantidade, idcategoria, nomecategoria){
     let produtoId = Number(id);
     let categoriaId = Number(idcategoria);
@@ -101,7 +101,7 @@ function listarPrdutos(){
             quantProduto.innerHTML = element.quantidadeEstoque;
             precoProduto.innerHTML = element.preco;
             clone.appendChild(changeButtonProduto());
-            //clone.appendChild(delButtonProduto);
+            clone.appendChild(delButtonProduto());
             pai.appendChild(clone);
             
         });
@@ -115,10 +115,8 @@ listarPrdutos();
 function deletarProduto(id){
     let token = localStorage.getItem("TOKEN-SESSION");
     const params = new URLSearchParams({produtoId : id});
-    const query = params.toString(); 
+    const query = params.toString(); // Output: foo=1&bar=2 
     const url = `http://localhost:8181/produtos/deletar?${query}`;
-
-    console.log("id:" + produtoId);
     console.log(token);
     let request = new XMLHttpRequest();
     request.open("DELETE", url, false);
