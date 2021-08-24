@@ -44,16 +44,23 @@ function cadastrarProduto() {
         alert("Produto Cadastrado!");
     }
 }
-function mudarProduto(id, nome, preco, quantidade){
+function mudarProduto(id, nome, preco, quantidade, idcategoria, nomecategoria){
     let produtoId = Number(id);
+    let categoriaId = Number(idcategoria);
     let produtoP = Number(preco);
     let produtoQ = Number(quantidade);
     var data = JSON.stringify({
+        "categorias": [
+          {
+            "categoriaId": categoriaId,
+            "descricao": nomecategoria
+          }
+        ],
         "descricaoProduto": nome,
         "preco": produtoP,
         "produtoId": produtoId,
-        "quantidadeEstoque": produtoQ
-    })
+        "quantidadeEstoque":produtoQ
+      })
     console.log(data);
 
     let token = localStorage.getItem('TOKEN-SESSION');
@@ -87,8 +94,8 @@ function listarPrdutos(){
             let quantProduto = clone.querySelector(".produtoQuantitade");
             let precoProduto = clone.querySelector(".precoProduto");
             position.innerHTML = index;
-            idCategoria.innerHTML = element.categoriaId;
-            categoriaNome.innerHTML = element.descricao;
+            idCategoria.innerHTML = element.categoria[0].categoriaId;
+            categoriaNome.innerHTML = element.categoria[0].descricao;
             idProduto.innerHTML = element.produtoId;
             nomeProduto.innerHTML = element.descricaoProduto;
             quantProduto.innerHTML = element.quantidadeEstoque;
@@ -152,14 +159,15 @@ const changeLiProduto = (event) => {
     let inputValuePreco = change.parentElement.querySelector('.change-quantidade-produto').value;
     let inputValueQuantidade = change.parentElement.querySelector('.change-preco-produto').value;
     let id = change.parentElement.querySelector('.produtoId').innerHTML;
-    let nome = document.querySelector(".produtoNome");
-    let preco = document.querySelector(".precoProduto") ;
-    let quantidade =document.querySelector(".produtoQuantitade") ;
+    let idCategoria = change.parentElement.querySelector(".categoriaId").innerHTML;
+    let categoriaNome = change.parentElement.querySelector(".categoriaNome").innerHTML;
     console.log(inputValueNome);
     console.log(inputValuePreco);
     console.log(inputValueQuantidade);
     console.log(id);
-    mudarProduto(id, inputValueNome,inputValuePreco,inputValueQuantidade);
+    console.log(idCategoria);
+    console.log(categoriaNome);
+    mudarProduto(id, inputValueNome,inputValuePreco,inputValueQuantidade, idCategoria, categoriaNome);
     return change;
 }       
         
