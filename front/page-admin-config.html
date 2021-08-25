@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="container">
+        <a class="inicial" href="index.html">
+            <img src="/images/home.png" alt="Pagina Incial">
+        </a>
+        <h1>Trabalho de Prog Web 1</h1>
+        <div class="group-conta-carrinho">
+            <div  class="conta-user" id="conta-user">
+                <p>olá,&nbsp;</p>
+                <p id="user" ></p>
+            </div>
+            <a href="pagina-minha-conta.html" class="minha-conta" id="minha-conta">
+                <img src="images/user-image.png" alt="Minha Conta">
+            </a>
+            <a href="#" id="logout" class="minha-conta" onclick="singOut()" >
+                <img src="images/logout-icon.png" alt="">
+            </a>
+            <a href="page-cart.html" class="cart-container">
+                <img src="images/cart.png" alt="">
+                <div class="cart__itens">
+                    1
+                </div>
+            </a>
+        </div>
+        
+    </header>
+    <div class="conta-wrapper">
+        <div role="group" class="lista-minha-conta">
+            <div class="content-menu-conta">
+                <div class="excluir-conta">
+                    <a href="/pagina-minha-conta-config.html"> Configurações da Conta </a>
+                </div>
+
+            </div>
+            <div class="minha-conta-display">
+                <div class="content-info-conta">
+                    <p id="login-config" class="text-info-user">User: X</p>
+                    <p id="nome-config" class="text-info-user">Nome: Nome do Usuário</p>
+                    <p id="email-config" class="text-info-user" >Email: Example@example.com</p>
+                    <p id="endereco-config" class="text-info-user" >Endereço: Rua Example, 0</p>
+                </div>
+            <div class="edit-info-conta">
+                <button class="button-modal">Alterar os dados</button>
+                <section class="modal-container" data-modal="container">
+                    <div class="modal">
+                        <button data-modal="close" class="close-modal">x</button>
+                        <div class="modal-content">
+                            <i class="far fa-check-circle"></i>
+                            <form action="">
+                                <div class="input-item">
+                                    <label for="change-name">Digite o seu novo nome</label>
+                                    <input type="text" id="change-name">
+                                </div>
+                                <div class="input-item">
+                                    <label for="change-email">Digite seu novo e-mail</label>
+                                    <input type="email" id="change-email">
+                                </div>
+                                <div class="input-item">
+                                    <label for="change-address">Digite seu novo endereço</label>
+                                    <input type="text" id="change-address">
+                                </div>
+                                <a href="/pagina-minha-conta-config.html" onclick="changeData()" >Alterar</a>
+                            </form>
+                        </div>
+                    </div>
+                </section>
+                <a class="minha-conta-logout" href="#" onclick="deleteCliente()"> Excluir conta </a> </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="js/main.js"></script>

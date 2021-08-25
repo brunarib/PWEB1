@@ -70,7 +70,7 @@ function changeData() {
 
 if (localStorage.getItem('TOKEN-SESSION')){
    signIn();
-   if (window.location.href == "http://localhost:3000/pagina-minha-conta.html" || window.location.href == "http://localhost:3000/pagina-minha-conta-config.html" || window.location.href == "http://localhost:3000/index.html" ){
+   if (window.location.href == "http://localhost:3000/pagina-minha-conta.html" || window.location.href == "http://localhost:3000/pagina-minha-conta-config.html" || window.location.href == "http://localhost:3000/index.html" || window.location.href == "http://localhost:3000/page-admin-config.html" ){
     userData();
    }
    
