@@ -146,7 +146,7 @@ function deletarProduto(id){
 
 
 const delButtonProduto = () => {
-    const del = document.createElement('a');
+    const del = document.createElement('button');
     del.innerText = 'excluir';
     del.addEventListener('click', delLiProduto);
 

@@ -222,6 +222,6 @@ function deleteCliente(){
     request.setRequestHeader("Authorization", "Bearer "+token);
     request.send();
     console.log(request.responseText);
-    
+    singOut()
 }
 

@@ -134,7 +134,7 @@ function deleteCategory(id){
 
 
 const delButton = () => {
-    const del = document.createElement('a');
+    const del = document.createElement('button');
     del.innerText = 'excluir';
     del.addEventListener('click', delLi);
 
