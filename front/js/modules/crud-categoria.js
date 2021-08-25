@@ -64,6 +64,7 @@ function cadastrarCategoria() {
     request.onload = function () {
 
         alert("Categoria Cadastrada!");
+        window.location.reload(true);
     }
 }
 

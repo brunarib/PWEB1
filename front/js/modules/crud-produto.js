@@ -42,6 +42,7 @@ function cadastrarProduto() {
     request.onload = function () {
 
         alert("Produto Cadastrado!");
+        window.location.reload(true);
     }
 } 
 function mudarProduto(id, nome, preco, quantidade, idcategoria, nomecategoria){
@@ -80,35 +81,53 @@ function listarPrdutos(){
     xhr.open("GET", "http://localhost:8181/produtos", true);
     xhr.onload = function(){
         var jsonResponse = JSON.parse(xhr.responseText);
-        console.log(jsonResponse);
         let pai = document.querySelector(".tableProduto");
         let tr = document.querySelector(".rowItemProduto");
-        jsonResponse.forEach((element, index) =>{
-            let clone = tr.cloneNode(true);
-            clone.style.display = "table-row";
-            let position = clone.querySelector(".rowNumberProduto");
-            let idCategoria = clone.querySelector(".categoriaId");
-            let categoriaNome =clone.querySelector(".categoriaNome");
-            let idProduto = clone.querySelector(".produtoId");
-            let nomeProduto = clone.querySelector(".produtoNome");
-            let quantProduto = clone.querySelector(".produtoQuantitade");
-            let precoProduto = clone.querySelector(".precoProduto");
-            position.innerHTML = index;
-            idCategoria.innerHTML = element.categoria[0].categoriaId;
-            categoriaNome.innerHTML = element.categoria[0].descricao;
-            idProduto.innerHTML = element.produtoId;
-            nomeProduto.innerHTML = element.descricaoProduto;
-            quantProduto.innerHTML = element.quantidadeEstoque;
-            precoProduto.innerHTML = element.preco;
-            clone.appendChild(changeButtonProduto());
-            clone.appendChild(delButtonProduto());
-            pai.appendChild(clone);
-            
-        });
+        if(document.querySelector('.product-list')){
+            jsonResponse.forEach((element, index) =>{
+                let clone = tr.cloneNode(true);
+                clone.style.display = "table-row";
+                let position = clone.querySelector(".rowNumberProduto");
+                let idCategoria = clone.querySelector(".categoriaId");
+                let categoriaNome =clone.querySelector(".categoriaNome");
+                let idProduto = clone.querySelector(".produtoId");
+                let nomeProduto = clone.querySelector(".produtoNome");               
+                let quantProduto = clone.querySelector(".produtoQuantitade");
+                let precoProduto = clone.querySelector(".precoProduto");
+                position.innerHTML = index;
+                idCategoria.innerHTML = element.categoria[0].categoriaId;
+                categoriaNome.innerHTML = element.categoria[0].descricao;
+                idProduto.innerHTML = element.produtoId;
+                nomeProduto.innerHTML = element.descricaoProduto;
+                quantProduto.innerHTML = element.quantidadeEstoque;
+                precoProduto.innerHTML = element.preco;
+                clone.appendChild(changeButtonProduto());
+                clone.appendChild(delButtonProduto());
+                pai.appendChild(clone);
+            });
+        }
+
+        if(document.querySelector('.page-home')){
+            let productsList = document.querySelector('.product-listing');
+            let productItem = document.querySelector('.listing-item');
+            console.log(jsonResponse)
+            jsonResponse.forEach((element, index) =>{
+                let clone = productItem.cloneNode(true);
+                clone.style.display = "block";
+                let categoryName = clone.querySelector('.categorie__item');
+                let productName = clone.querySelector('.title__item');
+                let productPrice = clone.querySelector('.prices__total');
+                let productPriceHalf = clone.querySelector('.installment__value');
+                productPriceHalf.innerHTML ="R$ " + element.preco / 2 + ",00";
+                categoryName.innerHTML = element.categoria[0].descricao;
+                productName.innerHTML = element.descricaoProduto + " id: " + element.produtoId;
+                productPrice.innerHTML ="Total: R$ " + element.preco + ",00";
+
+                productsList.appendChild(clone);
+            });
+        }
     }
-    xhr.send(null);
-    console.log(jsonData);    
-        
+    xhr.send(null);    
 }
 listarPrdutos();
 
@@ -153,12 +172,24 @@ const changeButtonProduto = () => {
 
 const changeLiProduto = (event) => {
     const change = event.target;
+    let currentName = change.parentElement.querySelector('.produtoNome').innerHTML;
+    let currentPrice = change.parentElement.querySelector('.precoProduto').innerHTML;
+    let currentQtd = change.parentElement.querySelector('.produtoQuantitade').innerHTML;
     let inputValueNome = change.parentElement.querySelector('.change-description-produto').value;
-    let inputValuePreco = change.parentElement.querySelector('.change-quantidade-produto').value;
-    let inputValueQuantidade = change.parentElement.querySelector('.change-preco-produto').value;
+    let inputValuePreco = change.parentElement.querySelector('.change-preco-produto').value;
+    let inputValueQuantidade = change.parentElement.querySelector('.change-quantidade-produto').value;
     let id = change.parentElement.querySelector('.produtoId').innerHTML;
     let idCategoria = change.parentElement.querySelector(".categoriaId").innerHTML;
     let categoriaNome = change.parentElement.querySelector(".categoriaNome").innerHTML;
+    if(inputValueNome === ''){
+        inputValueNome = currentName;
+    }
+    if(inputValuePreco === ''){
+        inputValuePreco = currentPrice;
+    }
+    if(inputValueQuantidade === ''){
+        inputValueQuantidade = currentQtd;
+    }
     console.log(inputValueNome);
     console.log(inputValuePreco);
     console.log(inputValueQuantidade);
