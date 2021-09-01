@@ -89,7 +89,7 @@ function listarPrdutos(){
                 clone.style.display = "table-row";
                 let position = clone.querySelector(".rowNumberProduto");
                 let idCategoria = clone.querySelector(".categoriaId");
-                let categoriaNome =clone.querySelector(".categoriaNome");
+                let categoriaNome = clone.querySelector(".categoriaNome");
                 let idProduto = clone.querySelector(".produtoId");
                 let nomeProduto = clone.querySelector(".produtoNome");               
                 let quantProduto = clone.querySelector(".produtoQuantitade");
@@ -110,7 +110,7 @@ function listarPrdutos(){
         if(document.querySelector('.page-home')){
             let productsList = document.querySelector('.product-listing');
             let productItem = document.querySelector('.listing-item');
-            console.log(jsonResponse)
+            console.log(jsonResponse);
             jsonResponse.forEach((element, index) =>{
                 let clone = productItem.cloneNode(true);
                 clone.style.display = "block";
@@ -118,11 +118,13 @@ function listarPrdutos(){
                 let productName = clone.querySelector('.title__item');
                 let productPrice = clone.querySelector('.prices__total');
                 let productPriceHalf = clone.querySelector('.installment__value');
+                let idProduto = clone.querySelector(".id-produto");
                 productPriceHalf.innerHTML ="R$ " + element.preco / 2 + ",00";
                 categoryName.innerHTML = element.categoria[0].descricao;
-                productName.innerHTML = element.descricaoProduto + " id: " + element.produtoId;
+                productName.innerHTML = element.descricaoProduto;
+                idProduto = element.produtoId;
                 productPrice.innerHTML ="Total: R$ " + element.preco + ",00";
-
+                clone.appendChild(addButtonCarrinho());
                 productsList.appendChild(clone);
             });
         }
