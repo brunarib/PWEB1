@@ -37,8 +37,6 @@ public class CompraEntity {
     protected List<ProdutoCompraEntity> produtos;
 
 
-
-
     @Column(name = "status", nullable = false)
     protected String status;
 
