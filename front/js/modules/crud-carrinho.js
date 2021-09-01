@@ -34,7 +34,7 @@ function addCart(id, nome, preco){
         localStorage.setItem("CARRINHO", JSON.stringify(guarda));
     alert("Produto Adicionado ao Carrinho");         
 }
-
+/*
 function mostrarItensCart(){
     let guarda = JSON.parse(localStorage.getItem("CARRINHO"));
     console.log(guarda);
@@ -59,7 +59,7 @@ function mostrarItensCart(){
     }
 } 
 mostrarItensCart();
-
+*/
 function continuarComprando(){
     //window.open("http://localhost:3000/index.html","_self");
 }
