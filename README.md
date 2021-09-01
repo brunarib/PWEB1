@@ -46,7 +46,8 @@ Para utilizar as tecnologias desse projeto no front faça os seguintes passos
 Para utilizar as tecnologia desse projeto no back faça os seguintes passos
 -crie um BD postrgre com nome PWEB_DB
 -rode o scrip ddl disponivel no repositorio
--altere o arquivo aplication.propertie  localizado no main src com as credenciais de seu banco 
+-altere o arquivo aplication.properties  localizado no main src com as credenciais de seu banco 
+- com o BD criado rode o script VIEW_COMPRAS.SQL
 
 No powerShell
 - cd ecommerce
