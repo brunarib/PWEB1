@@ -191,7 +191,9 @@ function signIn(){
 }
 
 function singOut(){
-    localStorage.clear();
+    localStorage.removeItem("TOKEN-SESSION");
+    localStorage.removeItem("SENHA-SESSION");
+    localStorage.removeItem("LOGIN-SESSION");
     conta.classList.remove("is-active");
     logoutButton.classList.remove("is-active");
     userConta.classList.remove("is-active");
