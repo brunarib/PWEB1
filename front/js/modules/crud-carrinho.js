@@ -24,9 +24,9 @@ function addCart(id, nome, preco){
     let productName = nome;
     let productPrice = preco;
     let dados = JSON.stringify({
-        id : productId,
-        nome : productName,
-        preco :  productPrice
+        "id" : productId,
+        "nome" : productName,
+        "preco" :  productPrice
         });
         console.log(dados);
         let guarda = JSON.parse(localStorage.getItem('CARRINHO'));
@@ -35,40 +35,35 @@ function addCart(id, nome, preco){
     alert("Produto Adicionado ao Carrinho");         
 }
 
-function mostraItemCarrinho(){
-    
-}
-/*
-function mostraIteCarrinho(){
-    
-}
-
-
-
-function aumenta(){
-    let quantidade = document.querySelector(".quantidade-carrinho").textContent;
-    let valor = document.querySelector(".preco-carrinho").textContent;
-    quantidade = Number(quantidade) + 1; 
-    valor = Number(quantidade) * Number(valor);
-}
-function diminui(){
-    let quantidade = document.querySelector(".quantidade-carrinho").textContent;
-    let valor = document.querySelector(".preco-carrinho").textContent;
-    if (Number(quantidade) >= 1){
-        quantidade = Number(quantidade) - 1; 
-        String(valor).innerHTML = Number(quantidade) * Number(valor);
-        quantidade.innerHTML = String(quantidade);
+function mostrarItensCart(){
+    let guarda = JSON.parse(localStorage.getItem("CARRINHO"));
+    console.log(guarda);
+    let pai = document.querySelector(".tableProduto");
+    let tr = document.querySelector(".rowItemProduto");
+    for(let i=0; i<= guarda.length; i++){
+        let clone = tr.cloneNode(true);
+        clone.style.display = "table-row";
+        let idProduto = clone.querySelector(".produtoId");
+        let nomeProduto = clone.querySelector(".produtoNome");               
+        let quantProduto = clone.querySelector(".produtoQuantitade");
+        let precoProduto = clone.querySelector(".precoProduto");
+        idProduto.innerHTML = [i].id;
+        nomeProduto.innerHTML = [i].nome;
+        quantProduto.innerHTML = 1;
+        precoProduto.innerHTML = [i].preco;
+        console.log(idProduto);
+        console.log(nomeProduto);
+        console.log(precoProduto);
+        //clone.appendChild(delButtonProduto());
+        pai.appendChild(clone);
     }
-    else{
-        alert("Operação Invalida");
-    }  
+} 
+mostrarItensCart();
+
+function continuarComprando(){
+    //window.open("http://localhost:3000/index.html","_self");
 }
-
-function adicionaCarinho(nome, preco){
-    
-    
+function finaliarCompras(){
+    console.log("Envia");
+    alert("Compra Finalizada");
 }
-
-
-
-*/

@@ -34,63 +34,43 @@
     </header>
     <div class="content-wrapper">
         <h2 id="carrinho-info">Pedidos</h2>
-        <section class="carrinho-modelo"> 
-            <div class="carrinho-hero">
-                <div class="carrinho-titulo">
-                    <p class="nome-carrinho">Camera digital</p>
-                </div> 
-            </div>
-            <div class="carrinho-sub">
-                <div class="carrinho-separa">
-                    <p>Quantidade</p>
-                    <p class="quantidade-carrinho">1</p>
-                </div>
-                <div class="carrinho-separa">
-                    <button onclick="diminui()">-</button>
-                    <button onclick="aumenta()">+</button>
-                </div>
-                <div class="carrinho-separa">
-                    <p>Preço</p>
-                    <p class="preco-carrinho">R$1.850,00</p>
-                </div>
-                <button>Excluir produto</button>
-        </section>
-        <section class="carrinho-modelo"> 
-            <div class="carrinho-hero">
-                <img class="carrinho-imagem" src="images/camera.png" alt="Camera">
-                <div class="carrinho-titulo">
-                    <p>Camera digital</p>
-                    <p>Uma camera digital bem barata</p>
-                    <button>Excluir produto</button>
-                </div> 
-            </div>
-            <div class="carrinho-sub">
-                <div class="carrinho-separa">
-                    <p>Quantidade</p>
-                    <input type="number">
-                </div>
-                <div class="carrinho-separa">
-                    <p>Preço</p>
-                    <p>R$1.850,00</p>
-                </div>                                        
+        <section class="container">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Produto</th>
+                        <th scope="col">Quantidade</th>
+                        <th scope="col">Editar</th>
+                        <th scope="col">Preço</th>
+                        <th scope="col">Excluir</th>    
+                    </tr>
+                </thead>
+                <tbody class="tableProduto">
+                    <tr class="rowItemProduto" style="display: none;">
+                        <td class="produtoId">0</td>
+                        <td class="produtoNome">Mouse</td>
+                        <td class="produtoQuantitade">0</td>
+                        <td class="edit">
+                            <input type="number" class="change-quantidade-produto" placeholder="Diga a nova quantidade do Produto">
+                        </td>
+                        <td class="precoProduto">0</td> 
+                    </tr>
+                </tbody>
+            </table>           
         </section>
         <hr/>
-        <section class="carrinho-preco">
-            <h3 id="carrinho-resumo">Resumo</h3>
-            <div class="carrinho-pedido">
-                <span>Camera Digital</span>
-                <span>1.850,00</span>
-            </div>
-            <div class="carrinho-pedido">
-                <span>Camera Digital</span>
-                <span>1.850,00</span>
-            </div>
-            <p id="carrinho-total">Total R$3.700,00</p>                 
-            <div class="carrinho-buttons">
-                <button>Continuar Comprando</button>
-                <button>Fechar Pedido</button>
-            </div>   
-        </section>        
+        <div class="container">
+            <h3>Total</h3>
+            <span class="valor-final">R$: 0,00</span>
+            <button onclick="continuarComprando()">Continuar Comprando</button>
+            <button onclick="finalizarCompras()">Finalizar Pedido</button>
+        </div>
+           
+
+            
+        
+               
     </div>
 <script src="js/main.js"></script>
 </body>
