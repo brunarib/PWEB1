@@ -5,6 +5,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 
 @Builder(toBuilder = true)
@@ -30,6 +31,13 @@ public class CompraEntity {
 
     @Column(name = "valor_total", nullable = false)
     protected float valorTotal;
+
+    @OneToMany(fetch = FetchType.LAZY,cascade=CascadeType.ALL)
+    @JoinColumn(name = "id_produto_compra")
+    protected List<ProdutoCompraEntity> produtos;
+
+
+
 
     @Column(name = "status", nullable = false)
     protected String status;

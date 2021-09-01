@@ -16,7 +16,7 @@ public class ProdutoCompraEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE	)
     @Column(name = "id", unique = true,nullable = false)
-    protected  Long id;
+    protected  Long id_produto_compra;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "produto_id", nullable = false)
