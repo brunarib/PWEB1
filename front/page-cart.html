@@ -36,22 +36,24 @@
         <h2 id="carrinho-info">Pedidos</h2>
         <section class="carrinho-modelo"> 
             <div class="carrinho-hero">
-                <img class="carrinho-imagem" src="images/camera.png" alt="Camera">
                 <div class="carrinho-titulo">
-                    <p>Camera digital</p>
-                    <p>Uma camera digital bem barata</p>
-                    <button>Excluir produto</button>
+                    <p class="nome-carrinho">Camera digital</p>
                 </div> 
             </div>
             <div class="carrinho-sub">
                 <div class="carrinho-separa">
                     <p>Quantidade</p>
-                    <input type="number">
+                    <p class="quantidade-carrinho">1</p>
+                </div>
+                <div class="carrinho-separa">
+                    <button onclick="diminui()">-</button>
+                    <button onclick="aumenta()">+</button>
                 </div>
                 <div class="carrinho-separa">
                     <p>Preço</p>
-                    <p>R$1.850,00</p>
-                </div>                                        
+                    <p class="preco-carrinho">R$1.850,00</p>
+                </div>
+                <button>Excluir produto</button>
         </section>
         <section class="carrinho-modelo"> 
             <div class="carrinho-hero">
