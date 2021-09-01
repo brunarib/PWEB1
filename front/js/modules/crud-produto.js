@@ -118,9 +118,11 @@ function listarPrdutos(){
                 let productName = clone.querySelector('.title__item');
                 let productPrice = clone.querySelector('.prices__total');
                 let productPriceHalf = clone.querySelector('.installment__value');
+                let idProduto = clone.querySelector(".id-produto");
                 productPriceHalf.innerHTML ="R$ " + element.preco / 2 + ",00";
                 categoryName.innerHTML = element.categoria[0].descricao;
-                productName.innerHTML = element.descricaoProduto + " id: " + element.produtoId;
+                productName.innerHTML = element.descricaoProduto;
+                idProduto = element.produtoId;
                 productPrice.innerHTML ="Total: R$ " + element.preco + ",00";
                 clone.appendChild(addButtonCarrinho());
                 productsList.appendChild(clone);

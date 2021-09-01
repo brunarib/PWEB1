@@ -10,17 +10,21 @@ const addButtonCarrinho = () =>{
 }
 const addProduto = (event) =>{
     const add = event.target;
+    let currentId = add.parentElement.querySelector(".id-produto").innerHTML;
     let currentName = add.parentElement.querySelector('.title__item').innerHTML;
     let currentPreco =add.parentElement.querySelector('.prices__total').innerHTML;
+    console.log(currentId);
     console.log(currentName);
     console.log(currentPreco);
-    addCart(currentName, currentPreco);
+    addCart(currentId, currentName, currentPreco);
     return add;
 }
-function addCart(nome, preco){
+function addCart(id, nome, preco){
+    let productId = id;
     let productName = nome;
     let productPrice = preco;
     let dados = JSON.stringify({
+        id : productId,
         nome : productName,
         preco :  productPrice
         });
@@ -28,11 +32,15 @@ function addCart(nome, preco){
         let guarda = JSON.parse(localStorage.getItem('CARRINHO'));
         guarda.push(dados);
         localStorage.setItem("CARRINHO", JSON.stringify(guarda));
-    alert("Produto adicionado ao Carrainho");         
+    alert("Produto Adicionado ao Carrinho");         
+}
+
+function mostraItemCarrinho(){
+    
 }
 /*
 function mostraIteCarrinho(){
-    console.log("Mostra");
+    
 }
 
 
